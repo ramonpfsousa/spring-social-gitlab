@@ -16,8 +16,11 @@
 package org.springframework.social.gitlab.api.impl;
 
 import java.net.URI;
+import java.util.List;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.social.gitlab.api.GitlabUserOperations;
+import org.springframework.social.gitlab.api.domain.GitlabSSHKey;
+import org.springframework.social.gitlab.api.domain.GitlabSSHKeyList;
 import org.springframework.social.gitlab.api.domain.GitlabUser;
 import org.springframework.web.client.RestOperations;
 
@@ -33,9 +36,28 @@ public class GitlabUserTemplate implements GitlabUserOperations {
     }
 
     @Override
+    public GitlabUser getCurrentUser() {
+        URI uri = uriBuilder.builder().pathSegment("user").build().toUri();
+        return restOperations.getForObject(uri, GitlabUser.class);
+    }
+
+    @Override
     public GitlabUser getUser(long userId) {
         URI uri = uriBuilder.builder().pathSegment("users", "{userId}").buildAndExpand(userId).toUri();
         return restOperations.getForObject(uri, GitlabUser.class);
     }
 
+    @Override
+    public List<GitlabSSHKey> getCurrentUsersSSHKeys() {
+        URI uri = uriBuilder.builder().pathSegment("user", "keys").build().toUri();
+        return restOperations.getForObject(uri, GitlabSSHKeyList.class);
+    }
+
+    @Override
+    public GitlabSSHKey getCurrentUsersSSHKey(long keyId) {
+        URI uri = uriBuilder.builder().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
+        return restOperations.getForObject(uri, GitlabSSHKey.class);
+    }
+
+    
 }

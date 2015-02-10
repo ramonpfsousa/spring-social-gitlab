@@ -11,7 +11,7 @@
   "linkedin": "linkedin",
   "twitter": "twitter",
   "website_url": "website_url",
-  "avatar_url": "https://gitlab.com//uploads/user/avatar/52500/peter.JPG",
+  "avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg",
   "theme_id": 1,
   "color_scheme_id": 2,
   "is_admin": false,

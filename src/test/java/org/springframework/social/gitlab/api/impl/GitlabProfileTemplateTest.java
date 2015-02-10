@@ -38,7 +38,7 @@ public class GitlabProfileTemplateTest extends AbstractGitlabApiTest {
         assertEquals("linkedin", userProfile.getLinkedin());
         assertEquals("twitter", userProfile.getTwitter());
         assertEquals("website_url", userProfile.getWebsiteUrl());
-        assertEquals("https://gitlab.com//uploads/user/avatar/52500/peter.JPG", userProfile.getAvatarUrl());
+        assertEquals("http://localhost:3000/uploads/user/avatar/1/cd8.jpeg", userProfile.getAvatarUrl());
         assertEquals(1, userProfile.getThemeId());
         assertEquals(2, userProfile.getColorSchemeId());
         assertEquals(false, userProfile.isAdmin());
