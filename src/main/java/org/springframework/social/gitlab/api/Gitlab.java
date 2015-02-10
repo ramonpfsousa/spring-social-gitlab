@@ -10,4 +10,7 @@ import org.springframework.social.ApiBinding;
 public interface Gitlab extends ApiBinding {
 
     GitlabProfileOperations profileOperations();
+    
+    GitlabUserOperations userOperations();
+    
 }

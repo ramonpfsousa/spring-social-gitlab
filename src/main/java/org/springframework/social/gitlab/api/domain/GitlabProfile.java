@@ -1,5 +1,6 @@
 package org.springframework.social.gitlab.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
@@ -7,6 +8,7 @@ import java.util.Date;
  *
  * @author p.hoeffling
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GitlabProfile {
 
     private long id;

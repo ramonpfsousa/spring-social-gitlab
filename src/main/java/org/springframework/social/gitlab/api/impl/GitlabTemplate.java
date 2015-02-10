@@ -3,6 +3,7 @@ package org.springframework.social.gitlab.api.impl;
 import org.springframework.social.gitlab.api.Gitlab;
 import org.springframework.social.gitlab.api.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.GitlabUserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
 
@@ -14,6 +15,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
 
     private GitlabProfileOperations profileOperations;
  
+    private GitlabUserOperations userOperations;
+    
     private final GitlabUriBuilder uriBuilder;
     
     public GitlabTemplate(String accessToken) {
@@ -34,8 +37,14 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         return profileOperations;
     }
 
+    @Override
+    public GitlabUserOperations userOperations() {
+        return userOperations;
+    }
+
     
     private void initSubApis() {
         this.profileOperations = new GitlabProfileTemplate(getRestTemplate(), uriBuilder);
+        this.userOperations = new GitlabUserTemplate(getRestTemplate(), uriBuilder);
     }
 }
