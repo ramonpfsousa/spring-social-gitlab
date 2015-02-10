@@ -4,23 +4,16 @@ import java.net.URI;
 import org.springframework.social.gitlab.api.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.social.gitlab.api.domain.GitlabProfile;
-import org.springframework.util.Assert;
 import org.springframework.web.client.RestOperations;
 
 /**
  *
  * @author p.hoeffling
  */
-public class GitlabProfileTemplate implements GitlabProfileOperations {
+public class GitlabProfileTemplate extends AbstractGitlabTemplate implements GitlabProfileOperations {
 
-    private final RestOperations restOperations;
-
-    private final GitlabUriBuilder uriBuilder;
-    
     public GitlabProfileTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        Assert.notNull(uriBuilder, "GitlabUriBuilder can not be null.");
-        this.restOperations = restOperations;
-        this.uriBuilder = uriBuilder;
+        super(restOperations, uriBuilder);
     }
 
     @Override

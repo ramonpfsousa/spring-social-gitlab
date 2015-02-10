@@ -1,7 +1,8 @@
 package org.springframework.social.gitlab.api.impl;
 
 import java.util.List;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;

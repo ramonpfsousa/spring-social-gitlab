@@ -24,15 +24,10 @@ import org.springframework.social.gitlab.api.domain.GitlabSSHKeyList;
 import org.springframework.social.gitlab.api.domain.GitlabUser;
 import org.springframework.web.client.RestOperations;
 
-public class GitlabUserTemplate implements GitlabUserOperations {
-
-    private final RestOperations restOperations;
-
-    private final GitlabUriBuilder uriBuilder;
+public class GitlabUserTemplate extends AbstractGitlabTemplate implements GitlabUserOperations {
 
     public GitlabUserTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        this.restOperations = restOperations;
-        this.uriBuilder = uriBuilder;
+        super(restOperations, uriBuilder);
     }
 
     @Override

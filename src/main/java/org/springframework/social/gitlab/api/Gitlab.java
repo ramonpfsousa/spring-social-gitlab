@@ -13,4 +13,6 @@ public interface Gitlab extends ApiBinding {
     
     GitlabUserOperations userOperations();
     
+    GitlabProjectOperations projectOperations();
+    
 }
