@@ -3,3 +3,9 @@
 Spring Social provider module for [Gitlab API](http://doc.gitlab.com/ce/api/README.html)
 
 Since version 7.7 Gitlab implements OAuth application features.
+
+## Project state
+
+First goal is to provide a read only implementation of the users API.
+Admin an modifying operations may follow.
+
