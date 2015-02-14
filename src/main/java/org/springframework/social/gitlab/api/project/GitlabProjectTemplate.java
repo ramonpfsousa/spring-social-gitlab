@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.impl;
+package org.springframework.social.gitlab.api.project;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.GitlabProjectOperations;
+import org.springframework.social.gitlab.api.AbstractGitlabTemplate;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.social.gitlab.api.domain.project.GitlabProject;
-import org.springframework.social.gitlab.api.domain.project.GitlabProjectList;
 import org.springframework.web.client.RestOperations;
 
 /**
@@ -34,7 +32,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     }
     
     @Override
-    public List<GitlabProject> getProjectsAccesibleByCurrentUser() {
+    public List<GitlabProject> getProjectsAccessibleByCurrentUser() {
         URI uri = uriBuilder.builder().pathSegment("projects").build().toUri();
         return restOperations.getForObject(uri, GitlabProjectList.class);
     }
@@ -42,6 +40,9 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     @Override
     public List<GitlabProject> getProjectsOwnedByCurrentUser() {
         URI uri = uriBuilder.builder().pathSegment("projects", "owned").build().toUri();
+        
+        
+        
         return restOperations.getForObject(uri, GitlabProjectList.class);
     }
     

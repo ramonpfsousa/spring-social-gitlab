@@ -13,35 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.domain;
+package org.springframework.social.gitlab.api.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Date;
 
 /**
  *
  * @author p.hoeffling
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GitlabNamespace {
+public class GitlabUser {
 
     private long id;
 
     private String name;
 
-    private String description;
+    private String username;
 
-    private String path;
+    private String state;
 
-    @JsonProperty("owner_id")
-    private long ownerId;
-
-    @JsonProperty("created_at")
-    private Date createdAt;
-
-    @JsonProperty("updated_at")
-    private Date updatedAt;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
 
     public long getId() {
         return id;
@@ -59,44 +52,28 @@ public class GitlabNamespace {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPath() {
-        return path;
+    public String getState() {
+        return state;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
 }

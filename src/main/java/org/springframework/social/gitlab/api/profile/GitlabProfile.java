@@ -1,4 +1,4 @@
-package org.springframework.social.gitlab.api.domain;
+package org.springframework.social.gitlab.api.profile;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

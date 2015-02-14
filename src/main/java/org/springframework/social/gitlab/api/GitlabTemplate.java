@@ -1,10 +1,11 @@
-package org.springframework.social.gitlab.api.impl;
+package org.springframework.social.gitlab.api;
 
-import org.springframework.social.gitlab.api.Gitlab;
-import org.springframework.social.gitlab.api.GitlabProfileOperations;
-import org.springframework.social.gitlab.api.GitlabProjectOperations;
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.social.gitlab.api.GitlabUserOperations;
+import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
+import org.springframework.social.gitlab.api.project.GitlabProjectOperations;
+import org.springframework.social.gitlab.api.profile.GitlabProfileTemplate;
+import org.springframework.social.gitlab.api.project.GitlabProjectTemplate;
+import org.springframework.social.gitlab.api.user.GitlabUserTemplate;
+import org.springframework.social.gitlab.api.user.GitlabUserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
 

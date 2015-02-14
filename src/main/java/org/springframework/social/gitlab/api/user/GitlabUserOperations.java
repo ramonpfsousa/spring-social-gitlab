@@ -13,23 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api;
+package org.springframework.social.gitlab.api.user;
 
 import java.util.List;
-import org.springframework.social.gitlab.api.domain.project.GitlabProject;
 
 /**
  *
  * @author p.hoeffling
  */
-public interface GitlabProjectOperations {
+public interface GitlabUserOperations {
+
+    /**
+     * Get the currently logged in user.
+     * 
+     * @return 
+     */
+    public GitlabUser getCurrentUser();
     
-    public List<GitlabProject> getProjectsAccesibleByCurrentUser();
+    /**
+     * Get an user by id.
+     * 
+     * @param userId
+     * @return 
+     */
+    public GitlabUser getUser(long userId);
+
+    /**
+     * Get the SSH Keys for the currently logged in user.
+     * 
+     * @return 
+     */
+    public List<GitlabSSHKey> getCurrentUsersSSHKeys();
     
-    public List<GitlabProject> getProjectsOwnedByCurrentUser();
-    
-    public GitlabProject getProject(long projectId);
-    
-    
+    /**
+     * Get a single SSH Key for the current user.
+     * 
+     * @param keyId
+     * @return 
+     */
+    public GitlabSSHKey getCurrentUsersSSHKey(long keyId);
     
 }

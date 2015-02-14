@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.domain;
+package org.springframework.social.gitlab.api.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,11 +24,13 @@ import java.util.Date;
  * @author p.hoeffling
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GitlabOwner {
+public class GitlabSSHKey {
 
     private long id;
 
-    private String name;
+    private String title;
+
+    private String key;
 
     @JsonProperty("created_at")
     private Date createdAt;
@@ -41,12 +43,20 @@ public class GitlabOwner {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Date getCreatedAt() {

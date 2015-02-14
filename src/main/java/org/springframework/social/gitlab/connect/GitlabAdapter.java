@@ -6,7 +6,7 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.gitlab.api.Gitlab;
-import org.springframework.social.gitlab.api.domain.GitlabProfile;
+import org.springframework.social.gitlab.api.profile.GitlabProfile;
 
 /**
  *

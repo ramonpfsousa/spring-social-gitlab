@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.impl;
+package org.springframework.social.gitlab.api.project;
 
+import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.social.gitlab.api.domain.project.GitlabProject;
+import org.springframework.social.gitlab.api.project.GitlabProject;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -41,7 +42,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
         
 
-        List<GitlabProject> projects = gitlab.projectOperations().getProjectsAccesibleByCurrentUser();
+        List<GitlabProject> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
         
         assertThat(projects, hasSize(2));
     }

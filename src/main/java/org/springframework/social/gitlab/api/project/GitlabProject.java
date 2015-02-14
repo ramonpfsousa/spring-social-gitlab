@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.domain.project;
+package org.springframework.social.gitlab.api.project;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
-import org.springframework.social.gitlab.api.domain.GitlabAccess;
-import org.springframework.social.gitlab.api.domain.GitlabNamespace;
-import org.springframework.social.gitlab.api.domain.GitlabOwner;
 
 /**
  *
@@ -54,7 +51,7 @@ public class GitlabProject {
     @JsonProperty("web_url")
     private String webUrl;
 
-    private GitlabOwner owner;
+    private Owner owner;
 
     private String name;
 
@@ -80,7 +77,7 @@ public class GitlabProject {
 
     private boolean archived;
 
-    private GitlabNamespace namespace;
+    private Namespace namespace;
 
     private Permissions permissions;
 
@@ -154,11 +151,11 @@ public class GitlabProject {
         this.webUrl = webUrl;
     }
 
-    public GitlabOwner getOwner() {
+    public Owner getOwner() {
         return owner;
     }
 
-    public void setOwner(GitlabOwner owner) {
+    public void setOwner(Owner owner) {
         this.owner = owner;
     }
 
@@ -234,11 +231,11 @@ public class GitlabProject {
         this.archived = archived;
     }
 
-    public GitlabNamespace getNamespace() {
+    public Namespace getNamespace() {
         return namespace;
     }
 
-    public void setNamespace(GitlabNamespace namespace) {
+    public void setNamespace(Namespace namespace) {
         this.namespace = namespace;
     }
 
@@ -270,27 +267,167 @@ public class GitlabProject {
     public static class Permissions {
 
         @JsonProperty("project_access")
-        private GitlabAccess projectAccess;
+        private Access projectAccess;
 
         @JsonProperty("group_access")
-        private GitlabAccess groupAccess;
+        private Access groupAccess;
 
-        public GitlabAccess getProjectAccess() {
+        public Access getProjectAccess() {
             return projectAccess;
         }
 
-        public void setProjectAccess(GitlabAccess projectAccess) {
+        public void setProjectAccess(Access projectAccess) {
             this.projectAccess = projectAccess;
         }
 
-        public GitlabAccess getGroupAccess() {
+        public Access getGroupAccess() {
             return groupAccess;
         }
 
-        public void setGroupAccess(GitlabAccess groupAccess) {
+        public void setGroupAccess(Access groupAccess) {
             this.groupAccess = groupAccess;
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Access {
+
+            @JsonProperty("access_level")
+            private long accessLevel;
+
+            @JsonProperty("notification_level")
+            private long notificationLevel;
+
+            public long getAccessLevel() {
+                return accessLevel;
+            }
+
+            public void setAccessLevel(long accessLevel) {
+                this.accessLevel = accessLevel;
+            }
+
+            public long getNotificationLevel() {
+                return notificationLevel;
+            }
+
+            public void setNotificationLevel(long notificationLevel) {
+                this.notificationLevel = notificationLevel;
+            }
+
         }
 
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Namespace {
+
+        private long id;
+
+        private String name;
+
+        private String description;
+
+        private String path;
+
+        @JsonProperty("owner_id")
+        private long ownerId;
+
+        @JsonProperty("created_at")
+        private Date createdAt;
+
+        @JsonProperty("updated_at")
+        private Date updatedAt;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        public long getOwnerId() {
+            return ownerId;
+        }
+
+        public void setOwnerId(long ownerId) {
+            this.ownerId = ownerId;
+        }
+
+        public Date getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public Date getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(Date updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Owner {
+
+        private long id;
+
+        private String name;
+
+        @JsonProperty("created_at")
+        private Date createdAt;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Date getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+        }
+
+    }
 }

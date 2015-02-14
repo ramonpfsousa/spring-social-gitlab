@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.domain.project;
+package org.springframework.social.gitlab.api.user;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,6 @@ import java.util.ArrayList;
  *
  * @author p.hoeffling
  */
-public class GitlabProjectList extends ArrayList<GitlabProject> {
+public class GitlabSSHKeyList extends ArrayList<GitlabSSHKey> {
     private static final long serialVersionUID = 1L;    
 }
