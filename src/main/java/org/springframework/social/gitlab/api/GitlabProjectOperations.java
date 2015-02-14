@@ -16,7 +16,7 @@
 package org.springframework.social.gitlab.api;
 
 import java.util.List;
-import org.springframework.social.gitlab.api.domain.GitlabProject;
+import org.springframework.social.gitlab.api.domain.project.GitlabProject;
 
 /**
  *

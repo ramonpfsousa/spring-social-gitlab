@@ -19,8 +19,8 @@ import java.net.URI;
 import java.util.List;
 import org.springframework.social.gitlab.api.GitlabProjectOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.social.gitlab.api.domain.GitlabProject;
-import org.springframework.social.gitlab.api.domain.GitlabProjectList;
+import org.springframework.social.gitlab.api.domain.project.GitlabProject;
+import org.springframework.social.gitlab.api.domain.project.GitlabProjectList;
 import org.springframework.web.client.RestOperations;
 
 /**

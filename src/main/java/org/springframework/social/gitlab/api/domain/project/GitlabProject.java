@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.domain;
+package org.springframework.social.gitlab.api.domain.project;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import org.springframework.social.gitlab.api.domain.GitlabAccess;
+import org.springframework.social.gitlab.api.domain.GitlabNamespace;
+import org.springframework.social.gitlab.api.domain.GitlabOwner;
 
 /**
  *
@@ -79,7 +82,7 @@ public class GitlabProject {
 
     private GitlabNamespace namespace;
 
-    private GitlabProjectPermissions permissions;
+    private Permissions permissions;
 
     @JsonProperty("created_at")
     private Date createdAt;
@@ -239,11 +242,11 @@ public class GitlabProject {
         this.namespace = namespace;
     }
 
-    public GitlabProjectPermissions getPermissions() {
+    public Permissions getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(GitlabProjectPermissions permissions) {
+    public void setPermissions(Permissions permissions) {
         this.permissions = permissions;
     }
 
@@ -261,6 +264,33 @@ public class GitlabProject {
 
     public void setLastActivityAt(Date lastActivityAt) {
         this.lastActivityAt = lastActivityAt;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Permissions {
+
+        @JsonProperty("project_access")
+        private GitlabAccess projectAccess;
+
+        @JsonProperty("group_access")
+        private GitlabAccess groupAccess;
+
+        public GitlabAccess getProjectAccess() {
+            return projectAccess;
+        }
+
+        public void setProjectAccess(GitlabAccess projectAccess) {
+            this.projectAccess = projectAccess;
+        }
+
+        public GitlabAccess getGroupAccess() {
+            return groupAccess;
+        }
+
+        public void setGroupAccess(GitlabAccess groupAccess) {
+            this.groupAccess = groupAccess;
+        }
+
     }
 
 }
