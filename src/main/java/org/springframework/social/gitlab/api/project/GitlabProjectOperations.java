@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.project;
 
 import java.util.List;
+import org.springframework.util.MultiValueMap;
 
 /**
  *
@@ -24,6 +25,10 @@ import java.util.List;
 public interface GitlabProjectOperations {
     
     public List<GitlabProject> getProjectsAccessibleByCurrentUser();
+    
+    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
+    
+    public List<GitlabProject> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
     
     public List<GitlabProject> getProjectsOwnedByCurrentUser();
     
