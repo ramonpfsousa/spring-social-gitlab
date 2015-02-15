@@ -111,7 +111,7 @@ public class GitlabProject {
         this.defaultBranch = defaultBranch;
     }
 
-    public boolean isIsPublic() {
+    public boolean isPublic() {
         return isPublic;
     }
 
