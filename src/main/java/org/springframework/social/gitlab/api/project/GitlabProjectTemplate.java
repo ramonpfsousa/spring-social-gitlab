@@ -34,6 +34,8 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     static final String SEGMENT_OWNED = "owned";
 
     static final String SEGMENT_PROJECT_ID = "{projectId}";
+    
+    static final String SEGMENT_EVENTS = "events";
 
     public GitlabProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         super(restOperations, uriBuilder);
@@ -47,7 +49,9 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
-        UriComponentsBuilder builder = uriBuilder.builder().pathSegment(SEGMENT_PROJECTS);
+        UriComponentsBuilder builder = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS);
+        
         if (parameters != null) {
             builder.queryParams(parameters);
         }
@@ -62,15 +66,32 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<GitlabProject> getProjectsOwnedByCurrentUser() {
-        URI uri = uriBuilder.builder().pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED).build().toUri();
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
+                .build()
+                .toUri();
 
         return restOperations.getForObject(uri, GitlabProjectList.class);
     }
 
     @Override
     public GitlabProject getProject(long projectId) {
-        URI uri = uriBuilder.builder().pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID).buildAndExpand(projectId).toUri();
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID)
+                .buildAndExpand(projectId)
+                .toUri();
+        
         return restOperations.getForObject(uri, GitlabProject.class);
+    }
+
+    @Override
+    public List<GitlabProjectEvent> getProjectEvents(long projectId) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_EVENTS)
+                .buildAndExpand(projectId)
+                .toUri();
+        
+        return restOperations.getForObject(uri, GitlabProjectEventList.class);
     }
 
 }

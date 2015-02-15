@@ -15,25 +15,13 @@
  */
 package org.springframework.social.gitlab.api.project;
 
-import java.util.List;
-import org.springframework.util.MultiValueMap;
+import java.util.ArrayList;
 
 /**
  *
  * @author p.hoeffling
  */
-public interface GitlabProjectOperations {
-    
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser();
-    
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
-    
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
-    
-    public List<GitlabProject> getProjectsOwnedByCurrentUser();
-    
-    public GitlabProject getProject(long projectId);
-    
-    public List<GitlabProjectEvent> getProjectEvents(long projectId);
-    
+public class GitlabProjectEventList extends ArrayList<GitlabProjectEvent> {
+
+    private static final long serialVersionUID = 1L;
 }
