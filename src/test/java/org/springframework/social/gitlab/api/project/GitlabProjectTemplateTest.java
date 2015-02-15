@@ -15,14 +15,13 @@
  */
 package org.springframework.social.gitlab.api.project;
 
-import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.social.gitlab.api.project.GitlabProject;
+import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;

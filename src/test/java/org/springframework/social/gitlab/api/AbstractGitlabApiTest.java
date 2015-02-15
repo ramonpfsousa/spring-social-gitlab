@@ -1,10 +1,8 @@
 package org.springframework.social.gitlab.api;
 
-import org.springframework.social.gitlab.api.GitlabTemplate;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 /**

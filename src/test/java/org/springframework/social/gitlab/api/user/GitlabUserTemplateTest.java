@@ -1,6 +1,5 @@
 package org.springframework.social.gitlab.api.user;
 
-import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -8,9 +7,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.social.gitlab.api.user.GitlabSSHKey;
-import org.springframework.social.gitlab.api.user.GitlabUser;
-import static org.springframework.social.gitlab.api.user.TestUtils.verifyUtcDate;
+import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -46,7 +44,7 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 // Current user returns profile JSON!
-                .andRespond(withSuccess(jsonResource("gitlab-profile"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("gitlab-user-profile"), MediaType.APPLICATION_JSON));
         
         GitlabUser user = gitlab.userOperations().getCurrentUser();
         

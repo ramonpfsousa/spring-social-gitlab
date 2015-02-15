@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.user;
+package org.springframework.social.gitlab.api.utils;
 
 import java.util.Date;
 import static org.hamcrest.Matchers.is;

@@ -24,10 +24,10 @@ import org.springframework.util.MultiValueMap;
  */
 public class ListProjectParametersBuilder {
 
-    static final String PARAM_SEARCH = "search";
-    static final String PARAM_SORT = "sort";
-    static final String PARAM_ORDER_BY = "order_by";
-    static final String PARAM_ARCHIVED = "archived";
+    public static final String PARAM_SEARCH = "search";
+    public static final String PARAM_SORT = "sort";
+    public static final String PARAM_ORDER_BY = "order_by";
+    public static final String PARAM_ARCHIVED = "archived";
 
     private Boolean archived;
 
