@@ -37,8 +37,8 @@ Admin an modifying operations may follow.
     - [ ] edit hook
     - [ ] delete hook
   - [ ] branches
-    - [ ] list branches
-    - [ ] get single branch
+    - [x] list branches
+    - [x] get single branch
     - [ ] protect single branch
     - [ ] unprotect single branch
   
