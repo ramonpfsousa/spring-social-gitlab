@@ -34,6 +34,8 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     static final String SEGMENT_EVENTS = "events";
     static final String SEGMENT_MEMBERS = "members";
     static final String SEGMENT_USER_ID = "{userId}";
+    static final String SEGMENT_HOOKS = "hooks";
+    static final String SEGMENT_HOOK_ID = "{hookId}";
 
     public GitlabProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         super(restOperations, uriBuilder);
@@ -131,4 +133,27 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
         return restOperations.getForObject(uri, ProjectMember.class);
     }
 
+    @Override
+    public List<ProjectHook> getProjectHooks(long projectId) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_HOOKS)
+                .buildAndExpand(projectId)
+                .toUri();
+
+        return restOperations.getForObject(uri, ProjectHookList.class);
+    }
+
+    @Override
+    public ProjectHook getProjectHook(long projectId, long hookId) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_HOOKS, SEGMENT_HOOK_ID)
+                .buildAndExpand(projectId, hookId)
+                .toUri();
+
+        return restOperations.getForObject(uri, ProjectHook.class);
+        
+    }
+
+    
+    
 }

@@ -31,8 +31,8 @@ Admin an modifying operations may follow.
     - [ ] edit team member
     - [ ] remove team member
   - [ ] hooks
-    - [ ] list hooks
-    - [ ] get single hook
+    - [x] list hooks
+    - [x] get single hook
     - [ ] add hook
     - [ ] edit hook
     - [ ] delete hook
