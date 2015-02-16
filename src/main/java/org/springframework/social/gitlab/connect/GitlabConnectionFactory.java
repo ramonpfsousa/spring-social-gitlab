@@ -9,10 +9,10 @@ import org.springframework.social.gitlab.api.Gitlab;
  */
 public class GitlabConnectionFactory extends OAuth2ConnectionFactory<Gitlab> {
 
-    public GitlabConnectionFactory(String clientId, String clientSecret) {
+    public GitlabConnectionFactory(GitlabConfiguration configuration) {
         super(
             "gitlab", 
-            new GitlabServiceProvider(clientId, clientSecret), 
+            new GitlabServiceProvider(configuration), 
             new GitlabAdapter()
         );
     }

@@ -39,7 +39,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectBranches() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "repository", "branches")
                 .toUriString();
 
@@ -56,7 +56,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectBranch() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "repository", "branches", "async")
                 .toUriString();
 

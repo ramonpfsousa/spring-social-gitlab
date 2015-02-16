@@ -38,8 +38,12 @@ public class GitlabUriBuilder {
     public String getApiPath() {
         return apiPath;
     }
+    
+    public UriComponentsBuilder oauth() {
+        return UriComponentsBuilder.fromHttpUrl(baseUrl).pathSegment("oauth");
+    }
 
-    public UriComponentsBuilder builder() {
+    public UriComponentsBuilder api() {
         return UriComponentsBuilder.fromHttpUrl(baseUrl).path(apiPath);
     }
 

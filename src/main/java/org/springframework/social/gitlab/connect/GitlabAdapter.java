@@ -26,20 +26,21 @@ public class GitlabAdapter implements ApiAdapter<Gitlab> {
 
     @Override
     public void setConnectionValues(Gitlab gitlab, ConnectionValues values) {
-        GitlabProfile gitlabProfile = gitlab.profileOperations().getProfile();
-        values.setProviderUserId(Long.toString(gitlabProfile.getId()));
-        values.setDisplayName(gitlabProfile.getUsername());
-        values.setImageUrl(gitlabProfile.getAvatarUrl());
+        GitlabProfile profile = gitlab.profileOperations().getProfile();
+        
+        values.setProviderUserId(Long.toString(profile.getId()));
+        values.setDisplayName(profile.getUsername());
+        values.setImageUrl(profile.getAvatarUrl());
     }
 
     @Override
     public UserProfile fetchUserProfile(Gitlab gitlab) {
-        GitlabProfile gitlabProfile = gitlab.profileOperations().getProfile();
+        GitlabProfile profile = gitlab.profileOperations().getProfile();
 
         return new UserProfileBuilder()
-                .setEmail(gitlabProfile.getEmail())
-                .setName(gitlabProfile.getName())
-                .setUsername(gitlabProfile.getUsername())
+                .setEmail(profile.getEmail())
+                .setName(profile.getName())
+                .setUsername(profile.getUsername())
                 .build();
     }
 

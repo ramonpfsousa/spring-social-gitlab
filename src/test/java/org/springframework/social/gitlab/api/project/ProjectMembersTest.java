@@ -37,7 +37,7 @@ public class ProjectMembersTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectMembers() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "members")
                 .toUriString();
 
@@ -53,7 +53,7 @@ public class ProjectMembersTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectMemberMapping() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "members", "1")
                 .toUriString();
 

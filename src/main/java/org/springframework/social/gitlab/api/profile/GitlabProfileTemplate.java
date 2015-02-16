@@ -17,7 +17,7 @@ public class GitlabProfileTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public GitlabProfile getProfile() {
-        URI uri = uriBuilder.builder().pathSegment("user").build().toUri();
+        URI uri = uriBuilder.api().pathSegment("user").build().toUri();
         return restOperations.getForObject(uri, GitlabProfile.class);
     }
 

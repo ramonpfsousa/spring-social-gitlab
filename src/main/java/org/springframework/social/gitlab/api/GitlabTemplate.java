@@ -1,11 +1,11 @@
 package org.springframework.social.gitlab.api;
 
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
-import org.springframework.social.gitlab.api.project.GitlabProjectOperations;
 import org.springframework.social.gitlab.api.profile.GitlabProfileTemplate;
+import org.springframework.social.gitlab.api.project.GitlabProjectOperations;
 import org.springframework.social.gitlab.api.project.GitlabProjectTemplate;
-import org.springframework.social.gitlab.api.user.GitlabUserTemplate;
 import org.springframework.social.gitlab.api.user.GitlabUserOperations;
+import org.springframework.social.gitlab.api.user.GitlabUserTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
 
@@ -23,12 +23,6 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     
     private final GitlabUriBuilder uriBuilder;
     
-    public GitlabTemplate(String accessToken) {
-        super(accessToken);
-        this.uriBuilder = new GitlabUriBuilder();
-        initSubApis();
-    }
-
     public GitlabTemplate(String accessToken, GitlabUriBuilder uriBuilder) {
         super(accessToken);
         Assert.notNull(uriBuilder, "GitlabUriBuilder can not be null.");

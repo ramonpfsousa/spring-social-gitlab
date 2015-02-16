@@ -29,25 +29,25 @@ public class GitlabUserTemplate extends AbstractGitlabTemplate implements Gitlab
 
     @Override
     public GitlabUser getCurrentUser() {
-        URI uri = uriBuilder.builder().pathSegment("user").build().toUri();
+        URI uri = uriBuilder.api().pathSegment("user").build().toUri();
         return restOperations.getForObject(uri, GitlabUser.class);
     }
 
     @Override
     public GitlabUser getUser(long userId) {
-        URI uri = uriBuilder.builder().pathSegment("users", "{userId}").buildAndExpand(userId).toUri();
+        URI uri = uriBuilder.api().pathSegment("users", "{userId}").buildAndExpand(userId).toUri();
         return restOperations.getForObject(uri, GitlabUser.class);
     }
 
     @Override
     public List<GitlabSSHKey> getCurrentUsersSSHKeys() {
-        URI uri = uriBuilder.builder().pathSegment("user", "keys").build().toUri();
+        URI uri = uriBuilder.api().pathSegment("user", "keys").build().toUri();
         return restOperations.getForObject(uri, GitlabSSHKeyList.class);
     }
 
     @Override
     public GitlabSSHKey getCurrentUsersSSHKey(long keyId) {
-        URI uri = uriBuilder.builder().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
+        URI uri = uriBuilder.api().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
         return restOperations.getForObject(uri, GitlabSSHKey.class);
     }
 

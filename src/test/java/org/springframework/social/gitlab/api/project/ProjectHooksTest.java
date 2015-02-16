@@ -37,7 +37,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectHooks() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "hooks")
                 .toUriString();
 
@@ -53,7 +53,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectHook() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3", "hooks", "1")
                 .toUriString();
 

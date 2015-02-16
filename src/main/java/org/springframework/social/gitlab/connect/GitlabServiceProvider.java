@@ -11,20 +11,25 @@ import org.springframework.social.oauth2.OAuth2Template;
  */
 public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<Gitlab> {
 
-    public GitlabServiceProvider(String clientId, String clientSecret) {
+    private final GitlabConfiguration configuration;
+
+    public GitlabServiceProvider(GitlabConfiguration configuration) {
         super(new OAuth2Template(
-                clientId, 
-                clientSecret, 
-                "https://gitlab.com/oauth/authorize",
-                "https://gitlab.com/oauth/token"
+                configuration.getApplicationId(),
+                configuration.getApplicationSecret(),
+                configuration.getUriBuilder().oauth().pathSegment("authorize").toUriString(),
+                configuration.getUriBuilder().oauth().pathSegment("token").toUriString()
         ));
+        this.configuration = configuration;
+    }
+
+    public GitlabConfiguration getConfiguration() {
+        return configuration;
     }
 
     @Override
     public Gitlab getApi(String accessToken) {
-        return new GitlabTemplate(accessToken);
+        return new GitlabTemplate(accessToken, configuration.getUriBuilder());
     }
-    
-    
-    
+
 }

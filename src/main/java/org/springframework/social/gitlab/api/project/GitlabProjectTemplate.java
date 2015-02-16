@@ -45,7 +45,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<Project> getProjectsAccessibleByCurrentUser() {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS)
                 .build()
                 .toUri();
@@ -55,7 +55,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS)
                 .queryParams(parameters)
                 .build()
@@ -71,7 +71,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<Project> getProjectsOwnedByCurrentUser() {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
                 .build()
                 .toUri();
@@ -86,7 +86,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
                 .queryParams(parameters)
                 .build()
@@ -97,7 +97,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public Project getProject(long projectId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID)
                 .buildAndExpand(projectId)
                 .toUri();
@@ -107,7 +107,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<ProjectEvent> getProjectEvents(long projectId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_EVENTS)
                 .buildAndExpand(projectId)
                 .toUri();
@@ -117,7 +117,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<ProjectMember> getProjectMembers(long projectId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS)
                 .buildAndExpand(projectId)
                 .toUri();
@@ -127,7 +127,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public ProjectMember getProjectMember(long projectId, long userId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS, SEGMENT_USER_ID)
                 .buildAndExpand(projectId, userId)
                 .toUri();
@@ -137,7 +137,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<ProjectHook> getProjectHooks(long projectId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_HOOKS)
                 .buildAndExpand(projectId)
                 .toUri();
@@ -147,7 +147,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public ProjectHook getProjectHook(long projectId, long hookId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_HOOKS, SEGMENT_HOOK_ID)
                 .buildAndExpand(projectId, hookId)
                 .toUri();
@@ -158,7 +158,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<ProjectBranch> getProjectBranches(long projectId) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_REPOSITORY, SEGMENT_BRANCHES)
                 .buildAndExpand(projectId)
                 .toUri();
@@ -168,7 +168,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public ProjectBranch getProjectBranch(long projectId, String branchName) {
-        URI uri = uriBuilder.builder()
+        URI uri = uriBuilder.api()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_REPOSITORY, SEGMENT_BRANCHES, SEGMENT_BRANCH_NAME)
                 .buildAndExpand(projectId, branchName)
                 .toUri();

@@ -37,7 +37,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsAccesibleByCurrentUser() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects")
                 .toUriString();
 
@@ -52,7 +52,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsAccesibleByCurrentUserWithParams() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects")
                 .queryParam("archived", true)
                 .queryParam("order_by", "name")
@@ -77,7 +77,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsOwnedByCurrentUser() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "owned")
                 .toUriString();
 
@@ -92,7 +92,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsOwnedByCurrentUserWithParams() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "owned")
                 .queryParam("archived", true)
                 .queryParam("order_by", "name")
@@ -117,7 +117,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectMapping() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3")
                 .toUriString();
 
@@ -153,7 +153,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectOwnerMapping() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3")
                 .toUriString();
 
@@ -171,7 +171,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectNamespaceMapping() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3")
                 .toUriString();
 
@@ -193,7 +193,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectPermissionsMapping() {
-        String url = uriBuilder.builder()
+        String url = uriBuilder.api()
                 .pathSegment("projects", "3")
                 .toUriString();
 
