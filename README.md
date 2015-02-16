@@ -35,12 +35,10 @@ Admin an modifying operations may follow.
     - [ ] get single hook
     - [ ] add hook
     - [ ] edit hook
+    - [ ] delete hook
   - [ ] branches
     - [ ] list branches
     - [ ] get single branch
     - [ ] protect single branch
     - [ ] unprotect single branch
-    - 
-  - [ ] delete hook
-  - 
-
+  
