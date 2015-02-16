@@ -47,4 +47,9 @@ public interface GitlabProjectOperations {
     public List<ProjectHook> getProjectHooks(long projectId);
 
     public ProjectHook getProjectHook(long projectId, long hookId);
+    
+    public List<ProjectBranch> getProjectBranches(long projectId);
+    
+    public ProjectBranch getProjectBranch(long projectId, String branchName);
+    
 }
