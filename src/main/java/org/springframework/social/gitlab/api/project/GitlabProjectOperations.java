@@ -35,5 +35,8 @@ public interface GitlabProjectOperations {
     public GitlabProject getProject(long projectId);
     
     public List<GitlabProjectEvent> getProjectEvents(long projectId);
+ 
+    public List<GitlabProjectMember> getProjectMembers(long projectId);
     
+    public GitlabProjectMember getProjectMember(long projectId, long userId);
 }

@@ -34,8 +34,10 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     static final String SEGMENT_OWNED = "owned";
 
     static final String SEGMENT_PROJECT_ID = "{projectId}";
-    
+
     static final String SEGMENT_EVENTS = "events";
+    static final String SEGMENT_MEMBERS = "members";
+    static final String SEGMENT_USER_ID = "{userId}";
 
     public GitlabProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         super(restOperations, uriBuilder);
@@ -51,7 +53,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
         UriComponentsBuilder builder = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS);
-        
+
         if (parameters != null) {
             builder.queryParams(parameters);
         }
@@ -80,7 +82,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID)
                 .buildAndExpand(projectId)
                 .toUri();
-        
+
         return restOperations.getForObject(uri, GitlabProject.class);
     }
 
@@ -90,8 +92,28 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_EVENTS)
                 .buildAndExpand(projectId)
                 .toUri();
-        
+
         return restOperations.getForObject(uri, GitlabProjectEventList.class);
+    }
+
+    @Override
+    public List<GitlabProjectMember> getProjectMembers(long projectId) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS)
+                .buildAndExpand(projectId)
+                .toUri();
+
+        return restOperations.getForObject(uri, GitlabProjectMemberList.class);
+    }
+
+    @Override
+    public GitlabProjectMember getProjectMember(long projectId, long userId) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS, SEGMENT_USER_ID)
+                .buildAndExpand(projectId, userId)
+                .toUri();
+
+        return restOperations.getForObject(uri, GitlabProjectMember.class);
     }
 
 }
