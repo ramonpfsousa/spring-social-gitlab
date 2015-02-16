@@ -30,11 +30,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class GitlabProjectTemplate extends AbstractGitlabTemplate implements GitlabProjectOperations {
 
     static final String SEGMENT_PROJECTS = "projects";
-
     static final String SEGMENT_OWNED = "owned";
-
     static final String SEGMENT_PROJECT_ID = "{projectId}";
-
     static final String SEGMENT_EVENTS = "events";
     static final String SEGMENT_MEMBERS = "members";
     static final String SEGMENT_USER_ID = "{userId}";
@@ -45,20 +42,23 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
 
     @Override
     public List<GitlabProject> getProjectsAccessibleByCurrentUser() {
-        URI uri = uriBuilder.builder().pathSegment(SEGMENT_PROJECTS).build().toUri();
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS)
+                .build()
+                .toUri();
+        
         return restOperations.getForObject(uri, GitlabProjectList.class);
     }
 
     @Override
     public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
-        UriComponentsBuilder builder = uriBuilder.builder()
-                .pathSegment(SEGMENT_PROJECTS);
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS)
+                .queryParams(parameters)
+                .build()
+                .toUri();
 
-        if (parameters != null) {
-            builder.queryParams(parameters);
-        }
-
-        return restOperations.getForObject(builder.build().toUri(), GitlabProjectList.class);
+        return restOperations.getForObject(uri, GitlabProjectList.class);
     }
 
     @Override
@@ -70,6 +70,22 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     public List<GitlabProject> getProjectsOwnedByCurrentUser() {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
+                .build()
+                .toUri();
+
+        return restOperations.getForObject(uri, GitlabProjectList.class);
+    }
+
+    @Override
+    public List<GitlabProject> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder) {
+        return getProjectsOwnedByCurrentUser(builder.build());
+    }
+
+    @Override
+    public List<GitlabProject> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
+        URI uri = uriBuilder.builder()
+                .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
+                .queryParams(parameters)
                 .build()
                 .toUri();
 

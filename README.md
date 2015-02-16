@@ -13,9 +13,9 @@ Admin an modifying operations may follow.
 
 - [ ] [Projects](http://doc.gitlab.com/ce/api/projects.html)
   - [x] list projects
-  - [ ] list projects with params
+  - [x] list projects with params
   - [x] list owned projects
-  - [ ] list owned projects with params
+  - [x] list owned projects with params
   - [x] get single project
   - [x] get project events
   - [ ] create project

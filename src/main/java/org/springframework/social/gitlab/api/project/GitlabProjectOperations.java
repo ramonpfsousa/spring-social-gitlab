@@ -23,20 +23,24 @@ import org.springframework.util.MultiValueMap;
  * @author p.hoeffling
  */
 public interface GitlabProjectOperations {
-    
+
     public List<GitlabProject> getProjectsAccessibleByCurrentUser();
-    
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
-    
+
     public List<GitlabProject> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
-    
+
+    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
+
     public List<GitlabProject> getProjectsOwnedByCurrentUser();
-    
+
+    public List<GitlabProject> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
+
+    public List<GitlabProject> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
+
     public GitlabProject getProject(long projectId);
-    
+
     public List<GitlabProjectEvent> getProjectEvents(long projectId);
- 
+
     public List<GitlabProjectMember> getProjectMembers(long projectId);
-    
+
     public GitlabProjectMember getProjectMember(long projectId, long userId);
 }

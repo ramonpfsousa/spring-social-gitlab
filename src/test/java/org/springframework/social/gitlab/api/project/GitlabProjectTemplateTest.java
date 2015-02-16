@@ -37,7 +37,9 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsAccesibleByCurrentUser() {
-        String url = uriBuilder.builder().pathSegment("projects").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
@@ -49,14 +51,66 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
     }
 
     @Test
+    public void testGetProjectsAccesibleByCurrentUserWithParams() {
+        String url = uriBuilder.builder()
+                .pathSegment("projects")
+                .queryParam("archived", true)
+                .queryParam("order_by", "name")
+                .queryParam("sort", "desc")
+                .queryParam("search", "foo")
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+
+        ListProjectParametersBuilder params = new ListProjectParametersBuilder()
+                .withArchived()
+                .withOrderBy(ListProjectParametersBuilder.OrderBy.Name)
+                .withSort(ListProjectParametersBuilder.Sort.Desc)
+                .withSearch("foo");
+
+        List<GitlabProject> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser(params);
+
+        assertThat(projects, hasSize(2));
+    }
+
+    @Test
     public void testGetProjectsOwnedByCurrentUser() {
-        String url = uriBuilder.builder().pathSegment("projects", "owned").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "owned")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
 
         List<GitlabProject> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
+
+        assertThat(projects, hasSize(2));
+    }
+
+    @Test
+    public void testGetProjectsOwnedByCurrentUserWithParams() {
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "owned")
+                .queryParam("archived", true)
+                .queryParam("order_by", "name")
+                .queryParam("sort", "desc")
+                .queryParam("search", "foo")
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+
+        ListProjectParametersBuilder params = new ListProjectParametersBuilder()
+                .withArchived()
+                .withOrderBy(ListProjectParametersBuilder.OrderBy.Name)
+                .withSort(ListProjectParametersBuilder.Sort.Desc)
+                .withSearch("foo");
+
+        List<GitlabProject> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser(params);
 
         assertThat(projects, hasSize(2));
     }
@@ -102,15 +156,15 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
-        
+
         GitlabProject.Owner owner = gitlab.projectOperations().getProject(3).getOwner();
-        
+
         assertThat(owner, is(notNullValue()));
         assertThat(owner.getId(), is(3L));
         assertThat(owner.getName(), is("Diaspora"));
         verifyUtcDate(owner.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
     }
-    
+
     @Test
     public void testProjectNamespaceMapping() {
         String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
@@ -118,9 +172,9 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
-        
+
         GitlabProject.Namespace namespace = gitlab.projectOperations().getProject(3).getNamespace();
-        
+
         assertThat(namespace, is(notNullValue()));
         assertThat(namespace.getId(), is(3L));
         assertThat(namespace.getName(), is("Diaspora"));
@@ -130,6 +184,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
         verifyUtcDate(namespace.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
         verifyUtcDate(namespace.getUpdatedAt(), 2013, 9, 30, 13, 46, 02);
     }
+
     @Test
     public void testProjectPermissionsMapping() {
         String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
@@ -137,15 +192,15 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
-        
+
         GitlabProject.Permissions permissions = gitlab.projectOperations().getProject(3).getPermissions();
-        
+
         assertThat(permissions, is(notNullValue()));
-        
+
         assertThat(permissions.getProjectAccess(), is(notNullValue()));
         assertThat(permissions.getProjectAccess().getAccessLevel(), is(10L));
         assertThat(permissions.getProjectAccess().getNotificationLevel(), is(3L));
-        
+
         assertThat(permissions.getGroupAccess(), is(notNullValue()));
         assertThat(permissions.getGroupAccess().getAccessLevel(), is(50L));
         assertThat(permissions.getGroupAccess().getNotificationLevel(), is(4L));
