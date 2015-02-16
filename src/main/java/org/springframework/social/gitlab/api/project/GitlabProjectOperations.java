@@ -24,23 +24,23 @@ import org.springframework.util.MultiValueMap;
  */
 public interface GitlabProjectOperations {
 
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser();
+    public List<Project> getProjectsAccessibleByCurrentUser();
 
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
+    public List<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
 
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
+    public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
 
-    public List<GitlabProject> getProjectsOwnedByCurrentUser();
+    public List<Project> getProjectsOwnedByCurrentUser();
 
-    public List<GitlabProject> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
+    public List<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
 
-    public List<GitlabProject> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
+    public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
 
-    public GitlabProject getProject(long projectId);
+    public Project getProject(long projectId);
 
-    public List<GitlabProjectEvent> getProjectEvents(long projectId);
+    public List<ProjectEvent> getProjectEvents(long projectId);
 
-    public List<GitlabProjectMember> getProjectMembers(long projectId);
+    public List<ProjectMember> getProjectMembers(long projectId);
 
-    public GitlabProjectMember getProjectMember(long projectId, long userId);
+    public ProjectMember getProjectMember(long projectId, long userId);
 }

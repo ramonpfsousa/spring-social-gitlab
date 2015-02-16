@@ -46,7 +46,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
 
-        List<GitlabProjectEvent> events = gitlab.projectOperations().getProjectEvents(3);
+        List<ProjectEvent> events = gitlab.projectOperations().getProjectEvents(3);
 
         assertThat(events, is(notNullValue()));
         assertThat(events, hasSize(3));
@@ -60,7 +60,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
 
-        GitlabProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(0);
+        ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(0);
 
         assertThat(event, is(notNullValue()));
         assertThat(event.getTitle(), is("event-title-15"));
@@ -83,7 +83,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
 
-        GitlabProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(1);
+        ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(1);
 
         assertThat(event.getData(), is(notNullValue()));
         assertThat(event.getData(), hasKey("before"));

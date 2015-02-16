@@ -46,7 +46,7 @@ public class GitlabProjectTemplateMembersTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-member-list"), MediaType.APPLICATION_JSON));
 
-        List<GitlabProjectMember> members = gitlab.projectOperations().getProjectMembers(3);
+        List<ProjectMember> members = gitlab.projectOperations().getProjectMembers(3);
 
         assertThat(members, is(notNullValue()));
         assertThat(members, hasSize(3));
@@ -60,7 +60,7 @@ public class GitlabProjectTemplateMembersTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-member"), MediaType.APPLICATION_JSON));
 
-        GitlabProjectMember member = gitlab.projectOperations().getProjectMember(3, 1);
+        ProjectMember member = gitlab.projectOperations().getProjectMember(3, 1);
 
         assertThat(member, is(notNullValue()));
 

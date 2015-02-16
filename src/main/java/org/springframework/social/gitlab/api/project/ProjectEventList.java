@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author p.hoeffling
  */
-public class GitlabProjectEventList extends ArrayList<GitlabProjectEvent> {
+public class ProjectEventList extends ArrayList<ProjectEvent> {
 
     private static final long serialVersionUID = 1L;
 }

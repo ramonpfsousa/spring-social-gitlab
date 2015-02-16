@@ -21,7 +21,6 @@ import org.springframework.social.gitlab.api.AbstractGitlabTemplate;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
@@ -41,95 +40,95 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     }
 
     @Override
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser() {
+    public List<Project> getProjectsAccessibleByCurrentUser() {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS)
                 .build()
                 .toUri();
         
-        return restOperations.getForObject(uri, GitlabProjectList.class);
+        return restOperations.getForObject(uri, ProjectList.class);
     }
 
     @Override
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
+    public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectList.class);
+        return restOperations.getForObject(uri, ProjectList.class);
     }
 
     @Override
-    public List<GitlabProject> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder) {
+    public List<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder) {
         return getProjectsAccessibleByCurrentUser(builder.build());
     }
 
     @Override
-    public List<GitlabProject> getProjectsOwnedByCurrentUser() {
+    public List<Project> getProjectsOwnedByCurrentUser() {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectList.class);
+        return restOperations.getForObject(uri, ProjectList.class);
     }
 
     @Override
-    public List<GitlabProject> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder) {
+    public List<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder) {
         return getProjectsOwnedByCurrentUser(builder.build());
     }
 
     @Override
-    public List<GitlabProject> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
+    public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_OWNED)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectList.class);
+        return restOperations.getForObject(uri, ProjectList.class);
     }
 
     @Override
-    public GitlabProject getProject(long projectId) {
+    public Project getProject(long projectId) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProject.class);
+        return restOperations.getForObject(uri, Project.class);
     }
 
     @Override
-    public List<GitlabProjectEvent> getProjectEvents(long projectId) {
+    public List<ProjectEvent> getProjectEvents(long projectId) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_EVENTS)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectEventList.class);
+        return restOperations.getForObject(uri, ProjectEventList.class);
     }
 
     @Override
-    public List<GitlabProjectMember> getProjectMembers(long projectId) {
+    public List<ProjectMember> getProjectMembers(long projectId) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectMemberList.class);
+        return restOperations.getForObject(uri, ProjectMemberList.class);
     }
 
     @Override
-    public GitlabProjectMember getProjectMember(long projectId, long userId) {
+    public ProjectMember getProjectMember(long projectId, long userId) {
         URI uri = uriBuilder.builder()
                 .pathSegment(SEGMENT_PROJECTS, SEGMENT_PROJECT_ID, SEGMENT_MEMBERS, SEGMENT_USER_ID)
                 .buildAndExpand(projectId, userId)
                 .toUri();
 
-        return restOperations.getForObject(uri, GitlabProjectMember.class);
+        return restOperations.getForObject(uri, ProjectMember.class);
     }
 
 }

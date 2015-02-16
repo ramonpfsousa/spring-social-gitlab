@@ -45,7 +45,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
 
-        List<GitlabProject> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
+        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
 
         assertThat(projects, hasSize(2));
     }
@@ -70,7 +70,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .withSort(ListProjectParametersBuilder.Sort.Desc)
                 .withSearch("foo");
 
-        List<GitlabProject> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser(params);
+        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser(params);
 
         assertThat(projects, hasSize(2));
     }
@@ -85,7 +85,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
 
-        List<GitlabProject> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
+        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
 
         assertThat(projects, hasSize(2));
     }
@@ -110,7 +110,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .withSort(ListProjectParametersBuilder.Sort.Desc)
                 .withSearch("foo");
 
-        List<GitlabProject> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser(params);
+        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser(params);
 
         assertThat(projects, hasSize(2));
     }
@@ -123,7 +123,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
 
-        GitlabProject project = gitlab.projectOperations().getProject(3);
+        Project project = gitlab.projectOperations().getProject(3);
 
         assertThat(project, is(notNullValue()));
         assertThat(project.getId(), is(3L));
@@ -157,7 +157,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
 
-        GitlabProject.Owner owner = gitlab.projectOperations().getProject(3).getOwner();
+        Project.Owner owner = gitlab.projectOperations().getProject(3).getOwner();
 
         assertThat(owner, is(notNullValue()));
         assertThat(owner.getId(), is(3L));
@@ -173,7 +173,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
 
-        GitlabProject.Namespace namespace = gitlab.projectOperations().getProject(3).getNamespace();
+        Project.Namespace namespace = gitlab.projectOperations().getProject(3).getNamespace();
 
         assertThat(namespace, is(notNullValue()));
         assertThat(namespace.getId(), is(3L));
@@ -193,7 +193,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
 
-        GitlabProject.Permissions permissions = gitlab.projectOperations().getProject(3).getPermissions();
+        Project.Permissions permissions = gitlab.projectOperations().getProject(3).getPermissions();
 
         assertThat(permissions, is(notNullValue()));
 

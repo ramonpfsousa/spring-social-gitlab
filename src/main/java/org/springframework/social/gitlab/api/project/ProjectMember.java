@@ -24,7 +24,7 @@ import java.util.Date;
  * @author p.hoeffling
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GitlabProjectMember {
+public class ProjectMember {
 
     private long id;
 

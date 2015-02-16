@@ -24,7 +24,7 @@ import java.util.Map;
  * @author p.hoeffling
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GitlabProjectEvent {
+public class ProjectEvent {
 
     @JsonProperty("project_id")
     private long projectId;
