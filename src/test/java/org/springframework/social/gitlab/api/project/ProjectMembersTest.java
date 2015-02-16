@@ -16,12 +16,9 @@
 package org.springframework.social.gitlab.api.project;
 
 import java.util.List;
-import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
@@ -36,15 +33,17 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  *
  * @author p.hoeffling
  */
-public class GitlabProjectTemplateMembersTest extends AbstractGitlabApiTest {
+public class ProjectMembersTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectMembers() {
-        String url = uriBuilder.builder().pathSegment("projects", "3", "members").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3", "members")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-member-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-member-list"), MediaType.APPLICATION_JSON));
 
         List<ProjectMember> members = gitlab.projectOperations().getProjectMembers(3);
 
@@ -54,11 +53,13 @@ public class GitlabProjectTemplateMembersTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectMemberMapping() {
-        String url = uriBuilder.builder().pathSegment("projects", "3", "members", "1").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3", "members", "1")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-member"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-member"), MediaType.APPLICATION_JSON));
 
         ProjectMember member = gitlab.projectOperations().getProjectMember(3, 1);
 

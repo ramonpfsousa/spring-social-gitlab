@@ -16,7 +16,6 @@
 package org.springframework.social.gitlab.api.project;
 
 import java.util.List;
-import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -27,7 +26,6 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
-import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -36,7 +34,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  *
  * @author p.hoeffling
  */
-public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
+public class ProjectEventsTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectEvents() {
@@ -44,7 +42,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
 
         List<ProjectEvent> events = gitlab.projectOperations().getProjectEvents(3);
 
@@ -58,7 +56,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
 
         ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(0);
 
@@ -81,7 +79,7 @@ public class GitlabProjectTemplateEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
 
         ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(1);
 

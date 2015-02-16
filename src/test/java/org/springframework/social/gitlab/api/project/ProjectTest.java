@@ -33,7 +33,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  *
  * @author p.hoeffling
  */
-public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
+public class ProjectTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectsAccesibleByCurrentUser() {
@@ -43,7 +43,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
 
         List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
 
@@ -62,7 +62,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
 
         ListProjectParametersBuilder params = new ListProjectParametersBuilder()
                 .withArchived()
@@ -83,7 +83,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
 
         List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
 
@@ -102,7 +102,7 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
 
         ListProjectParametersBuilder params = new ListProjectParametersBuilder()
                 .withArchived()
@@ -117,11 +117,13 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectMapping() {
-        String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
 
         Project project = gitlab.projectOperations().getProject(3);
 
@@ -151,11 +153,13 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectOwnerMapping() {
-        String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
 
         Project.Owner owner = gitlab.projectOperations().getProject(3).getOwner();
 
@@ -167,11 +171,13 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectNamespaceMapping() {
-        String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
 
         Project.Namespace namespace = gitlab.projectOperations().getProject(3).getNamespace();
 
@@ -187,11 +193,13 @@ public class GitlabProjectTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectPermissionsMapping() {
-        String url = uriBuilder.builder().pathSegment("projects", "3").toUriString();
+        String url = uriBuilder.builder()
+                .pathSegment("projects", "3")
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-project"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
 
         Project.Permissions permissions = gitlab.projectOperations().getProject(3).getPermissions();
 
