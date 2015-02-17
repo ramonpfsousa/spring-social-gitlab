@@ -15,31 +15,40 @@
  */
 package org.springframework.social.gitlab.connect;
 
+import org.springframework.core.env.PropertyResolver;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.util.Assert;
 
 /**
  *
  * @author p.hoeffling
  */
 public class GitlabConfiguration {
+
+    public static GitlabConfiguration fromProperties(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
+        if (baseUrl == null) {
+            baseUrl = GitlabUriBuilder.DEFAULT_URL;
+        }
+        if (apiPath == null) {
+            apiPath = GitlabUriBuilder.DEFAULT_API_PATH;
+        }        
+        return new GitlabConfiguration(applicationId, applicationSecret, baseUrl, apiPath);
+    }
+    
+    public static GitlabConfiguration fromProperties(PropertyResolver propertyResolver) {
+        return fromProperties(
+                propertyResolver.getRequiredProperty("spring.social.gitlab.app-id"),
+                propertyResolver.getRequiredProperty("spring.social.gitlab.app-secret"),
+                propertyResolver.getProperty("spring.social.gitlab.base-url"),
+                propertyResolver.getProperty("spring.social.gitlab.api-path")
+        );
+    }
     
     private final String applicationId;
     
     private final String applicationSecret;
     
     private final GitlabUriBuilder uriBuilder;
-    
-    public GitlabConfiguration(String applicationId, String applicationSecret) {
-        this.applicationId = applicationId;
-        this.applicationSecret = applicationSecret;
-        this.uriBuilder = new GitlabUriBuilder();
-    }
-    
-    public GitlabConfiguration(String applicationId, String applicationSecret, String baseUrl) {
-        this.applicationId = applicationId;
-        this.applicationSecret = applicationSecret;
-        this.uriBuilder = new GitlabUriBuilder(baseUrl);
-    }
     
     public GitlabConfiguration(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
         this.applicationId = applicationId;
@@ -58,5 +67,6 @@ public class GitlabConfiguration {
     public GitlabUriBuilder getUriBuilder() {
         return uriBuilder;
     }
+
     
 }
