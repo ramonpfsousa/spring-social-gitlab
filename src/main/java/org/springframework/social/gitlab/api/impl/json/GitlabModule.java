@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.gitlab.api.Project;
 import org.springframework.social.gitlab.api.ProjectBranch;
 import org.springframework.social.gitlab.api.ProjectEvent;
+import org.springframework.social.gitlab.api.ProjectHook;
 
 /**
  *
@@ -51,6 +52,9 @@ public class GitlabModule extends SimpleModule {
         
         // ProjectEvent
         context.setMixInAnnotations(ProjectEvent.class, ProjectEventMixin.class);
+        
+        // ProjectHook
+        context.setMixInAnnotations(ProjectHook.class, ProjectHookMixin.class);
         
     }
 
