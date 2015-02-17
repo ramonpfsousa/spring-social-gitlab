@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.project;
+package org.springframework.social.gitlab.api;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author p.hoeffling
  */
-public class ProjectList extends ArrayList<Project> {
-    private static final long serialVersionUID = 1L;    
+public abstract class GitlabObject {
+
+    private Map<String, Object> extraData;
+
+    public GitlabObject() {
+        this.extraData = new HashMap<>();
+    }
+
+    public Map<String, Object> getExtraData() {
+        return extraData;
+    }
+
+    protected void addExtraData(String key, Object value) {
+        extraData.put(key, value);
+    }
+
 }

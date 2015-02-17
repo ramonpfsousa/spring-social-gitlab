@@ -13,9 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.project;
+package org.springframework.social.gitlab.api;
 
+import org.springframework.social.gitlab.api.ProjectHook;
+import org.springframework.social.gitlab.api.ProjectEvent;
+import org.springframework.social.gitlab.api.Project;
+import org.springframework.social.gitlab.api.ProjectBranch;
+import org.springframework.social.gitlab.api.ProjectMember;
 import java.util.List;
+import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.util.MultiValueMap;
 
 /**

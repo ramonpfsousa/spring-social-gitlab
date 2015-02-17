@@ -2,7 +2,6 @@ package org.springframework.social.gitlab.api;
 
 import org.springframework.social.ApiBinding;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
-import org.springframework.social.gitlab.api.project.GitlabProjectOperations;
 import org.springframework.social.gitlab.api.user.GitlabUserOperations;
 
 /**

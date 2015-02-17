@@ -15,6 +15,7 @@
  */
 package org.springframework.social.gitlab.api.project;
 
+import org.springframework.social.gitlab.api.ProjectEvent;
 import java.util.List;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;

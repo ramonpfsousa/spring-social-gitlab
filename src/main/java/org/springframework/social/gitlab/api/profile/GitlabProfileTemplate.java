@@ -1,7 +1,7 @@
 package org.springframework.social.gitlab.api.profile;
 
 import java.net.URI;
-import org.springframework.social.gitlab.api.AbstractGitlabTemplate;
+import org.springframework.social.gitlab.api.impl.AbstractGitlabTemplate;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.web.client.RestOperations;
 
