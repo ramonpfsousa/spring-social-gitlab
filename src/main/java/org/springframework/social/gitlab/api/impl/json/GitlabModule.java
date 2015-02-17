@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.social.gitlab.api.GitlabProfile;
 import org.springframework.social.gitlab.api.Project;
 import org.springframework.social.gitlab.api.ProjectBranch;
 import org.springframework.social.gitlab.api.ProjectEvent;
@@ -60,6 +61,8 @@ public class GitlabModule extends SimpleModule {
         // ProjectMember
         context.setMixInAnnotations(ProjectMember.class, ProjectMemberMixin.class);
         
+        // GitlabProfile
+        context.setMixInAnnotations(GitlabProfile.class, GitlabProfileMixin.class);
     }
 
 }

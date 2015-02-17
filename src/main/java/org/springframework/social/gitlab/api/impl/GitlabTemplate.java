@@ -6,9 +6,8 @@ import org.springframework.social.gitlab.api.Gitlab;
 import org.springframework.social.gitlab.api.GitlabProjectOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.social.gitlab.api.impl.json.GitlabModule;
-import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
-import org.springframework.social.gitlab.api.profile.GitlabProfileTemplate;
-import org.springframework.social.gitlab.api.user.GitlabUserOperations;
+import org.springframework.social.gitlab.api.GitlabProfileOperations;
+import org.springframework.social.gitlab.api.GitlabUserOperations;
 import org.springframework.social.gitlab.api.user.GitlabUserTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
@@ -48,7 +47,7 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     public GitlabProjectOperations projectOperations() {
         return projectOperations;
     }
-
+    
     @Override
     protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
         MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();

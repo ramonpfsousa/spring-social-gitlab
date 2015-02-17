@@ -15,6 +15,7 @@
  */
 package org.springframework.social.gitlab.api.user;
 
+import org.springframework.social.gitlab.api.GitlabUserOperations;
 import java.net.URI;
 import java.util.List;
 import org.springframework.social.gitlab.api.impl.AbstractGitlabTemplate;

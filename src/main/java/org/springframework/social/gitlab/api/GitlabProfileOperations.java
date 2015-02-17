@@ -1,4 +1,4 @@
-package org.springframework.social.gitlab.api.profile;
+package org.springframework.social.gitlab.api;
 
 /**
  *

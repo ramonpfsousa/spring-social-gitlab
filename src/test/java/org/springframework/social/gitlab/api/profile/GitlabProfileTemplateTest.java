@@ -1,5 +1,6 @@
 package org.springframework.social.gitlab.api.profile;
 
+import org.springframework.social.gitlab.api.GitlabProfile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
