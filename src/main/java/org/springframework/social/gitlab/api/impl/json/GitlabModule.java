@@ -17,6 +17,7 @@ package org.springframework.social.gitlab.api.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.gitlab.api.Project;
+import org.springframework.social.gitlab.api.ProjectBranch;
 
 /**
  *
@@ -32,11 +33,20 @@ public class GitlabModule extends SimpleModule {
 
     @Override
     public void setupModule(SetupContext context) {
+        
+        // Project
         context.setMixInAnnotations(Project.class, ProjectMixin.class);
         context.setMixInAnnotations(Project.Permissions.class, ProjectMixin.PermissionsMixin.class);
         context.setMixInAnnotations(Project.Permissions.Access.class, ProjectMixin.PermissionsMixin.AccessMixin.class);
         context.setMixInAnnotations(Project.Namespace.class, ProjectMixin.NamespaceMixin.class);
         context.setMixInAnnotations(Project.Owner.class, ProjectMixin.OwnerMixin.class);
+
+        // ProjectBranch
+        context.setMixInAnnotations(ProjectBranch.class, ProjectBranchMixin.class);
+        context.setMixInAnnotations(ProjectBranch.Commit.class, ProjectBranchMixin.CommitMixin.class);
+        context.setMixInAnnotations(ProjectBranch.Commit.Author.class, ProjectBranchMixin.CommitMixin.AuthorMixin.class);
+        context.setMixInAnnotations(ProjectBranch.Commit.Committer.class, ProjectBranchMixin.CommitMixin.CommitterMixin.class);
+        context.setMixInAnnotations(ProjectBranch.Commit.Parent.class, ProjectBranchMixin.CommitMixin.ParentMixin.class);
     }
 
 }
