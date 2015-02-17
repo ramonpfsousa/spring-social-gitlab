@@ -20,6 +20,7 @@ import org.springframework.social.gitlab.api.Project;
 import org.springframework.social.gitlab.api.ProjectBranch;
 import org.springframework.social.gitlab.api.ProjectEvent;
 import org.springframework.social.gitlab.api.ProjectHook;
+import org.springframework.social.gitlab.api.ProjectMember;
 
 /**
  *
@@ -55,6 +56,9 @@ public class GitlabModule extends SimpleModule {
         
         // ProjectHook
         context.setMixInAnnotations(ProjectHook.class, ProjectHookMixin.class);
+        
+        // ProjectMember
+        context.setMixInAnnotations(ProjectMember.class, ProjectMemberMixin.class);
         
     }
 
