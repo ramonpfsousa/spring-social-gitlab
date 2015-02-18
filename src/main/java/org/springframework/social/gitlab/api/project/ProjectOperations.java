@@ -15,19 +15,7 @@
  */
 package org.springframework.social.gitlab.api.project;
 
-import org.springframework.social.gitlab.api.project.ProjectHook;
-import org.springframework.social.gitlab.api.project.ProjectEvent;
-import org.springframework.social.gitlab.api.project.Project;
-import org.springframework.social.gitlab.api.project.ProjectBranch;
-import org.springframework.social.gitlab.api.project.ProjectMember;
 import java.util.List;
-import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
-import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
-import org.springframework.social.gitlab.api.project.Project;
-import org.springframework.social.gitlab.api.project.ProjectBranch;
-import org.springframework.social.gitlab.api.project.ProjectEvent;
-import org.springframework.social.gitlab.api.project.ProjectHook;
-import org.springframework.social.gitlab.api.project.ProjectMember;
 import org.springframework.util.MultiValueMap;
 
 /**

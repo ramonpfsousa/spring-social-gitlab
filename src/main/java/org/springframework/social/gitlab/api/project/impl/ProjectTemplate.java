@@ -17,20 +17,8 @@ package org.springframework.social.gitlab.api.project.impl;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
-import org.springframework.social.gitlab.api.project.Project;
-import org.springframework.social.gitlab.api.project.ProjectBranch;
-import org.springframework.social.gitlab.api.project.ProjectBranchList;
-import org.springframework.social.gitlab.api.project.ProjectEvent;
-import org.springframework.social.gitlab.api.project.ProjectEventList;
-import org.springframework.social.gitlab.api.project.ProjectHook;
-import org.springframework.social.gitlab.api.project.ProjectHookList;
-import org.springframework.social.gitlab.api.project.ProjectList;
-import org.springframework.social.gitlab.api.project.ProjectMember;
-import org.springframework.social.gitlab.api.project.ProjectMemberList;
-import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
 import org.springframework.social.gitlab.api.project.ProjectBranch;
@@ -42,6 +30,7 @@ import org.springframework.social.gitlab.api.project.ProjectHookList;
 import org.springframework.social.gitlab.api.project.ProjectList;
 import org.springframework.social.gitlab.api.project.ProjectMember;
 import org.springframework.social.gitlab.api.project.ProjectMemberList;
+import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
 

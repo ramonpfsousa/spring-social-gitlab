@@ -15,19 +15,19 @@
  */
 package org.springframework.social.gitlab.api.core.impl.json;
 
-import org.springframework.social.gitlab.api.profile.impl.json.GitlabProfileMixin;
-import org.springframework.social.gitlab.api.project.impl.json.ProjectMixin;
-import org.springframework.social.gitlab.api.project.impl.json.ProjectMemberMixin;
-import org.springframework.social.gitlab.api.project.impl.json.ProjectHookMixin;
-import org.springframework.social.gitlab.api.project.impl.json.ProjectEventMixin;
-import org.springframework.social.gitlab.api.project.impl.json.ProjectBranchMixin;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.gitlab.api.profile.GitlabProfile;
+import org.springframework.social.gitlab.api.profile.impl.json.GitlabProfileMixin;
 import org.springframework.social.gitlab.api.project.Project;
 import org.springframework.social.gitlab.api.project.ProjectBranch;
 import org.springframework.social.gitlab.api.project.ProjectEvent;
 import org.springframework.social.gitlab.api.project.ProjectHook;
 import org.springframework.social.gitlab.api.project.ProjectMember;
+import org.springframework.social.gitlab.api.project.impl.json.ProjectBranchMixin;
+import org.springframework.social.gitlab.api.project.impl.json.ProjectEventMixin;
+import org.springframework.social.gitlab.api.project.impl.json.ProjectHookMixin;
+import org.springframework.social.gitlab.api.project.impl.json.ProjectMemberMixin;
+import org.springframework.social.gitlab.api.project.impl.json.ProjectMixin;
 
 /**
  *

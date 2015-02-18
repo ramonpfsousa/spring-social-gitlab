@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public abstract class GitlabObject {
 
-    private Map<String, Object> extraData;
+    private final Map<String, Object> extraData;
 
     public GitlabObject() {
         this.extraData = new HashMap<>();
