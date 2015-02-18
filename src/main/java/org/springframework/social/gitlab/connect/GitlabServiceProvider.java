@@ -1,7 +1,7 @@
 package org.springframework.social.gitlab.connect;
 
 import org.springframework.social.gitlab.api.Gitlab;
-import org.springframework.social.gitlab.api.impl.GitlabTemplate;
+import org.springframework.social.gitlab.api.core.impl.GitlabTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.oauth2.OAuth2Template;
 

@@ -15,7 +15,6 @@
  */
 package org.springframework.social.gitlab.api.project;
 
-import org.springframework.social.gitlab.api.ProjectBranch;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 
 import java.util.List;

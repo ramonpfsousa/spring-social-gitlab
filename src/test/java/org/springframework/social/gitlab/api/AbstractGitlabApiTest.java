@@ -1,6 +1,6 @@
 package org.springframework.social.gitlab.api;
 
-import org.springframework.social.gitlab.api.impl.GitlabTemplate;
+import org.springframework.social.gitlab.api.core.impl.GitlabTemplate;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
