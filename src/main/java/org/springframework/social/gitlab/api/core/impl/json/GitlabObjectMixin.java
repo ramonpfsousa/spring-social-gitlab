@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api;
+package org.springframework.social.gitlab.api.core.impl.json;
 
-import org.springframework.web.client.RestOperations;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  *
  * @author p.hoeffling
  */
-public class AbstractGitlabTemplate {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public abstract class GitlabObjectMixin {
     
-    protected final RestOperations restOperations;
-    
-    protected final GitlabUriBuilder uriBuilder;
-
-    public AbstractGitlabTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        this.restOperations = restOperations;
-        this.uriBuilder = uriBuilder;
-    }
-
-    
+    @JsonAnySetter
+    abstract void addExtraData(String key, Object value);
 }

@@ -13,12 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.project;
+package org.springframework.social.gitlab.api.project.impl;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.AbstractGitlabTemplate;
+import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
+import org.springframework.social.gitlab.api.project.Project;
+import org.springframework.social.gitlab.api.project.ProjectBranch;
+import org.springframework.social.gitlab.api.project.ProjectBranchList;
+import org.springframework.social.gitlab.api.project.ProjectEvent;
+import org.springframework.social.gitlab.api.project.ProjectEventList;
+import org.springframework.social.gitlab.api.project.ProjectHook;
+import org.springframework.social.gitlab.api.project.ProjectHookList;
+import org.springframework.social.gitlab.api.project.ProjectList;
+import org.springframework.social.gitlab.api.project.ProjectMember;
+import org.springframework.social.gitlab.api.project.ProjectMemberList;
+import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
+import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
+import org.springframework.social.gitlab.api.project.Project;
+import org.springframework.social.gitlab.api.project.ProjectBranch;
+import org.springframework.social.gitlab.api.project.ProjectBranchList;
+import org.springframework.social.gitlab.api.project.ProjectEvent;
+import org.springframework.social.gitlab.api.project.ProjectEventList;
+import org.springframework.social.gitlab.api.project.ProjectHook;
+import org.springframework.social.gitlab.api.project.ProjectHookList;
+import org.springframework.social.gitlab.api.project.ProjectList;
+import org.springframework.social.gitlab.api.project.ProjectMember;
+import org.springframework.social.gitlab.api.project.ProjectMemberList;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
 
@@ -26,7 +49,7 @@ import org.springframework.web.client.RestOperations;
  *
  * @author p.hoeffling
  */
-public class GitlabProjectTemplate extends AbstractGitlabTemplate implements GitlabProjectOperations {
+public class ProjectTemplate extends AbstractGitlabOperations implements ProjectOperations {
 
     static final String PROJECTS = "projects";
     static final String OWNED = "owned";
@@ -40,7 +63,7 @@ public class GitlabProjectTemplate extends AbstractGitlabTemplate implements Git
     static final String BRANCH_NAME = "{branchName}";
     static final String REPOSITORY = "repository";
 
-    public GitlabProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
+    public ProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         super(restOperations, uriBuilder);
     }
 

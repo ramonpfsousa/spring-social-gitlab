@@ -15,21 +15,18 @@
  */
 package org.springframework.social.gitlab.api.project;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import java.util.List;
+import org.springframework.social.gitlab.api.core.GitlabObject;
 
 /**
  *
  * @author p.hoeffling
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class ProjectBranch {
+public class ProjectBranch extends GitlabObject {
 
     private String name;
 
-    @JsonProperty("protected")
     private boolean isProtected;
 
     private Commit commit;
@@ -38,30 +35,15 @@ public class ProjectBranch {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean isProtected() {
         return isProtected;
-    }
-
-    public void setIsProtected(boolean isProtected) {
-        this.isProtected = isProtected;
     }
 
     public Commit getCommit() {
         return commit;
     }
 
-    public void setCommit(Commit commit) {
-        this.commit = commit;
-    }
-
-    
-    
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Commit {
+    public static class Commit extends GitlabObject {
 
         private String id;
 
@@ -75,93 +57,52 @@ public class ProjectBranch {
 
         private Committer committer;
 
-        @JsonProperty("authored_date")
         private Date authoredDate;
 
-        @JsonProperty("committed_date")
         private Date committedDate;
 
         public String getId() {
             return id;
         }
 
-        public void setId(String id) {
-            this.id = id;
-        }
-
         public List<Parent> getParents() {
             return parents;
-        }
-
-        public void setParents(List<Parent> parents) {
-            this.parents = parents;
         }
 
         public String getTree() {
             return tree;
         }
 
-        public void setTree(String tree) {
-            this.tree = tree;
-        }
-
         public String getMessage() {
             return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
         }
 
         public Author getAuthor() {
             return author;
         }
 
-        public void setAuthor(Author author) {
-            this.author = author;
-        }
-
         public Committer getCommitter() {
             return committer;
-        }
-
-        public void setCommitter(Committer committer) {
-            this.committer = committer;
         }
 
         public Date getAuthoredDate() {
             return authoredDate;
         }
 
-        public void setAuthoredDate(Date authoredDate) {
-            this.authoredDate = authoredDate;
-        }
-
         public Date getCommittedDate() {
             return committedDate;
         }
 
-        public void setCommittedDate(Date committedDate) {
-            this.committedDate = committedDate;
-        }
-
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Parent {
+        public static class Parent extends GitlabObject {
 
             private String id;
 
             public String getId() {
                 return id;
             }
-
-            public void setId(String id) {
-                this.id = id;
-            }
-
         }
 
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Author {
+        public static class Author extends GitlabObject {
 
             private String name;
 
@@ -171,22 +112,13 @@ public class ProjectBranch {
                 return name;
             }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
             public String getEmail() {
                 return email;
             }
 
-            public void setEmail(String email) {
-                this.email = email;
-            }
-
         }
 
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Committer {
+        public static class Committer extends GitlabObject {
 
             private String name;
 
@@ -196,18 +128,9 @@ public class ProjectBranch {
                 return name;
             }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
             public String getEmail() {
                 return email;
             }
-
-            public void setEmail(String email) {
-                this.email = email;
-            }
-
         }
     }
 }

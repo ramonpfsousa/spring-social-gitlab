@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.user;
+package org.springframework.social.gitlab.api.user.impl;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.AbstractGitlabTemplate;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
+import org.springframework.social.gitlab.api.user.GitlabSSHKey;
+import org.springframework.social.gitlab.api.user.GitlabSSHKeyList;
+import org.springframework.social.gitlab.api.user.GitlabUser;
+import org.springframework.social.gitlab.api.user.GitlabUserOperations;
 import org.springframework.web.client.RestOperations;
 
-public class GitlabUserTemplate extends AbstractGitlabTemplate implements GitlabUserOperations {
+public class GitlabUserTemplate extends AbstractGitlabOperations implements GitlabUserOperations {
 
     public GitlabUserTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         super(restOperations, uriBuilder);

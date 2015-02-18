@@ -16,6 +16,8 @@
 package org.springframework.social.gitlab.api.user;
 
 import java.util.List;
+import org.springframework.social.gitlab.api.user.GitlabSSHKey;
+import org.springframework.social.gitlab.api.user.GitlabUser;
 
 /**
  *
