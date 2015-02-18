@@ -19,7 +19,7 @@ import java.net.URI;
 import java.util.List;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.social.gitlab.api.core.impl.AbstractGitlabTemplate;
+import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
 import org.springframework.social.gitlab.api.project.Project;
 import org.springframework.social.gitlab.api.project.ProjectBranch;
 import org.springframework.social.gitlab.api.project.ProjectBranchList;
@@ -49,7 +49,7 @@ import org.springframework.web.client.RestOperations;
  *
  * @author p.hoeffling
  */
-public class ProjectTemplate extends AbstractGitlabTemplate implements ProjectOperations {
+public class ProjectTemplate extends AbstractGitlabOperations implements ProjectOperations {
 
     static final String PROJECTS = "projects";
     static final String OWNED = "owned";

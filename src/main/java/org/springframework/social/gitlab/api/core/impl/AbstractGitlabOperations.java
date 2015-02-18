@@ -22,13 +22,13 @@ import org.springframework.web.client.RestOperations;
  *
  * @author p.hoeffling
  */
-public class AbstractGitlabTemplate {
+public class AbstractGitlabOperations {
     
     protected final RestOperations restOperations;
     
     protected final GitlabUriBuilder uriBuilder;
 
-    public AbstractGitlabTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
+    public AbstractGitlabOperations(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
         this.restOperations = restOperations;
         this.uriBuilder = uriBuilder;
     }
