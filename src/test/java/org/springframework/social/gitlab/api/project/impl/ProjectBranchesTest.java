@@ -22,13 +22,11 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ProjectBranch;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  *
@@ -44,7 +42,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-branch-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-branch-list"));
 
         List<ProjectBranch> branches = gitlab.projectOperations().getProjectBranches(3);
 
@@ -61,7 +59,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-branch"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-branch"));
 
         ProjectBranch branch = gitlab.projectOperations().getProjectBranch(3, "async");
 

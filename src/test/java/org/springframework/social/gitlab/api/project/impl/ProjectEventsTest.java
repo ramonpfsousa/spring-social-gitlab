@@ -24,12 +24,10 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ProjectEvent;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  *
@@ -43,7 +41,7 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-event-list"));
 
         List<ProjectEvent> events = gitlab.projectOperations().getProjectEvents(3);
 
@@ -57,7 +55,7 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-event-list"));
 
         ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(0);
 
@@ -79,7 +77,7 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-event-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-event-list"));
 
         ProjectEvent event = gitlab.projectOperations().getProjectEvents(3).get(1);
 

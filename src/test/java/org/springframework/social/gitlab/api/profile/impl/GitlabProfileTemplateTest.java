@@ -3,13 +3,11 @@ package org.springframework.social.gitlab.api.profile.impl;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.profile.GitlabProfile;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  *
@@ -24,7 +22,7 @@ public class GitlabProfileTemplateTest extends AbstractGitlabApiTest {
         
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("gitlab-profile"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("gitlab-profile"));
         
         GitlabProfile userProfile = gitlab.profileOperations().getProfile();
         assertEquals(1, userProfile.getId());

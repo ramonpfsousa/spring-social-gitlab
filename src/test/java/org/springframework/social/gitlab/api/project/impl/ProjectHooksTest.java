@@ -22,13 +22,11 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ProjectHook;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  *
@@ -44,7 +42,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-hook-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-hook-list"));
 
         List<ProjectHook> hooks = gitlab.projectOperations().getProjectHooks(3);
 
@@ -60,7 +58,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-hook"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-hook"));
 
         ProjectHook hook = gitlab.projectOperations().getProjectHook(3, 1);
 

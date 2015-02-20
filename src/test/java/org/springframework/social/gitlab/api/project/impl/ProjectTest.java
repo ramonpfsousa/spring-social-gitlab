@@ -22,14 +22,12 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  *
@@ -45,7 +43,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-list"));
 
         List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
 
@@ -64,7 +62,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-list"));
 
         ListProjectParametersBuilder params = new ListProjectParametersBuilder()
                 .withArchived()
@@ -85,7 +83,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-list"));
 
         List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
 
@@ -104,7 +102,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project-list"));
 
         ListProjectParametersBuilder params = new ListProjectParametersBuilder()
                 .withArchived()
@@ -125,7 +123,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project"));
 
         Project project = gitlab.projectOperations().getProject(3);
 
@@ -161,7 +159,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project"));
 
         Project.Owner owner = gitlab.projectOperations().getProject(3).getOwner();
 
@@ -179,7 +177,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project"));
 
         Project.Namespace namespace = gitlab.projectOperations().getProject(3).getNamespace();
 
@@ -201,7 +199,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project"), MediaType.APPLICATION_JSON));
+                .andRespond(withJsonResourceSuccess("project"));
 
         Project.Permissions permissions = gitlab.projectOperations().getProject(3).getPermissions();
 
