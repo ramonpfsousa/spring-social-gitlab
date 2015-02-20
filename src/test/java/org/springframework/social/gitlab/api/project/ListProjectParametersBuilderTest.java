@@ -15,11 +15,14 @@
  */
 package org.springframework.social.gitlab.api.project;
 
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.springframework.util.MultiValueMap;
-import static org.hamcrest.Matchers.*;
 
 /**
  *

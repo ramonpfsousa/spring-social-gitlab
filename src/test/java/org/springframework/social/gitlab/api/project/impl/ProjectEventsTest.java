@@ -73,7 +73,6 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
         assertThat(event.getData(), is(nullValue()));
     }
 
-    
     @Test
     public void testProjectEventWithDataMapping() {
         String url = uriBuilder.api().pathSegment("projects", "3", "events").toUriString();
@@ -86,6 +85,6 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
         assertThat(event.getData(), is(notNullValue()));
         assertThat(event.getData(), hasKey("before"));
-        
+
     }
 }
