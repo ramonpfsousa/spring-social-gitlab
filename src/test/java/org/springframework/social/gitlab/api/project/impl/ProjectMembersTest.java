@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.project;
+package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import org.springframework.social.gitlab.api.project.ProjectMember;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -33,46 +34,47 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  *
  * @author p.hoeffling
  */
-public class ProjectHooksTest extends AbstractGitlabApiTest {
+public class ProjectMembersTest extends AbstractGitlabApiTest {
 
     @Test
-    public void testGetProjectHooks() {
+    public void testGetProjectMembers() {
         String url = uriBuilder.api()
-                .pathSegment("projects", "3", "hooks")
+                .pathSegment("projects", "3", "members")
                 .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-hook-list"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-member-list"), MediaType.APPLICATION_JSON));
 
-        List<ProjectHook> hooks = gitlab.projectOperations().getProjectHooks(3);
+        List<ProjectMember> members = gitlab.projectOperations().getProjectMembers(3);
 
-        assertThat(hooks, is(notNullValue()));
-        assertThat(hooks, hasSize(3));
+        assertThat(members, is(notNullValue()));
+        assertThat(members, hasSize(3));
     }
 
     @Test
-    public void testGetProjectHook() {
+    public void testProjectMemberMapping() {
         String url = uriBuilder.api()
-                .pathSegment("projects", "3", "hooks", "1")
+                .pathSegment("projects", "3", "members", "1")
                 .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(jsonResource("project-hook"), MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("project-member"), MediaType.APPLICATION_JSON));
 
-        ProjectHook hook = gitlab.projectOperations().getProjectHook(3, 1);
+        ProjectMember member = gitlab.projectOperations().getProjectMember(3, 1);
 
-        assertThat(hook, is(notNullValue()));
+        assertThat(member, is(notNullValue()));
 
-        assertThat(hook.getId(), is(1L));
-        assertThat(hook.getUrl(), is("http://example.com/hook"));
-        assertThat(hook.getProjectId(), is(3L));
-        assertThat(hook.isPushEvents(), is(true));
-        assertThat(hook.isIssuesEvents(), is(true));
-        assertThat(hook.isMergeRequestsEvents(), is(true));
+        assertThat(member.getId(), is(1L));
+        assertThat(member.getUsername(), is("john_smith"));
+        assertThat(member.getEmail(), is("john@example.com"));
+        assertThat(member.getName(), is("John Smith"));
+        assertThat(member.getState(), is("active"));
+        assertThat(member.getAccessLevel(), is(40L));
 
-        verifyUtcDate(hook.getCreatedAt(), 2012, 10, 12, 17, 4, 47);
+        verifyUtcDate(member.getCreatedAt(), 2012, 5, 23, 8, 0, 58);
+
     }
 
 }

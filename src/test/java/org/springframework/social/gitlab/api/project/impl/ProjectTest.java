@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.gitlab.api.project;
+package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
+import org.springframework.social.gitlab.api.project.Project;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;

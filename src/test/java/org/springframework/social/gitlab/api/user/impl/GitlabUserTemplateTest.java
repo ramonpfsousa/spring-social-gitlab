@@ -1,4 +1,4 @@
-package org.springframework.social.gitlab.api.user;
+package org.springframework.social.gitlab.api.user.impl;
 
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import org.springframework.social.gitlab.api.user.GitlabSSHKey;
+import org.springframework.social.gitlab.api.user.GitlabUser;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;

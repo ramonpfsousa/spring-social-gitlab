@@ -35,22 +35,27 @@ public class GitlabTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProfileOperations() {
+        assertThat(gitlab.profileOperations(), is(notNullValue()));
     }
 
     @Test
     public void testUserOperations() {
+        assertThat(gitlab.userOperations(), is(notNullValue()));
     }
 
     @Test
     public void testProjectOperations() {
+        assertThat(gitlab.projectOperations(), is(notNullValue()));
     }
 
     @Test
     public void testRestOperations() {
+        assertThat(gitlab.restOperations(), is(notNullValue()));
     }
 
     @Test
     public void testUriBuilder() {
+        assertThat(gitlab.uriBuilder(), is(notNullValue()));
     }
 
     @Test
