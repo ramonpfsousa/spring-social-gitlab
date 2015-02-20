@@ -15,8 +15,7 @@
  */
 package org.springframework.social.gitlab.api.core.impl;
 
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.web.client.RestOperations;
+import org.springframework.social.gitlab.api.GitlabApiBinding;
 
 /**
  *
@@ -24,14 +23,10 @@ import org.springframework.web.client.RestOperations;
  */
 public class AbstractGitlabOperations {
     
-    protected final RestOperations restOperations;
-    
-    protected final GitlabUriBuilder uriBuilder;
+    protected final GitlabApiBinding gitlabApiBinding;
 
-    public AbstractGitlabOperations(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        this.restOperations = restOperations;
-        this.uriBuilder = uriBuilder;
+    public AbstractGitlabOperations(GitlabApiBinding gitlabApiBinding) {
+        this.gitlabApiBinding = gitlabApiBinding;
     }
 
-    
 }

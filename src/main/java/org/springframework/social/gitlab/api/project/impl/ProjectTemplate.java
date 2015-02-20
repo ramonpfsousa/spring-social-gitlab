@@ -17,7 +17,7 @@ package org.springframework.social.gitlab.api.project.impl;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.GitlabApiBinding;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
@@ -32,7 +32,6 @@ import org.springframework.social.gitlab.api.project.ProjectMember;
 import org.springframework.social.gitlab.api.project.ProjectMemberList;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestOperations;
 
 /**
  *
@@ -52,29 +51,30 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
     static final String BRANCH_NAME = "{branchName}";
     static final String REPOSITORY = "repository";
 
-    public ProjectTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        super(restOperations, uriBuilder);
+    public ProjectTemplate(GitlabApiBinding gitlabApiBinding) {
+        super(gitlabApiBinding);
     }
 
+    
     @Override
     public List<Project> getProjectsAccessibleByCurrentUser() {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS)
                 .build()
                 .toUri();
         
-        return restOperations.getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
     }
 
     @Override
     public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
     }
 
     @Override
@@ -84,12 +84,12 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
 
     @Override
     public List<Project> getProjectsOwnedByCurrentUser() {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, OWNED)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
     }
 
     @Override
@@ -99,94 +99,94 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
 
     @Override
     public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, OWNED)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
     }
 
     @Override
     public Project getProject(long projectId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, Project.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, Project.class);
     }
 
     @Override
     public List<ProjectEvent> getProjectEvents(long projectId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, EVENTS)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectEventList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectEventList.class);
     }
 
     @Override
     public List<ProjectMember> getProjectMembers(long projectId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, MEMBERS)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectMemberList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectMemberList.class);
     }
 
     @Override
     public ProjectMember getProjectMember(long projectId, long userId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, MEMBERS, USER_ID)
                 .buildAndExpand(projectId, userId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectMember.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectMember.class);
     }
 
     @Override
     public List<ProjectHook> getProjectHooks(long projectId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, HOOKS)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectHookList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectHookList.class);
     }
 
     @Override
     public ProjectHook getProjectHook(long projectId, long hookId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, HOOKS, HOOK_ID)
                 .buildAndExpand(projectId, hookId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectHook.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectHook.class);
         
     }
 
     @Override
     public List<ProjectBranch> getProjectBranches(long projectId) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, REPOSITORY, BRANCHES)
                 .buildAndExpand(projectId)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectBranchList.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectBranchList.class);
     }
 
     @Override
     public ProjectBranch getProjectBranch(long projectId, String branchName) {
-        URI uri = uriBuilder.api()
+        URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, PROJECT_ID, REPOSITORY, BRANCHES, BRANCH_NAME)
                 .buildAndExpand(projectId, branchName)
                 .toUri();
 
-        return restOperations.getForObject(uri, ProjectBranch.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectBranch.class);
     }
 
     

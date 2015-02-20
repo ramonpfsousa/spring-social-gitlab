@@ -17,42 +17,42 @@ package org.springframework.social.gitlab.api.user.impl;
 
 import java.net.URI;
 import java.util.List;
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.GitlabApiBinding;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
 import org.springframework.social.gitlab.api.user.GitlabSSHKey;
 import org.springframework.social.gitlab.api.user.GitlabSSHKeyList;
 import org.springframework.social.gitlab.api.user.GitlabUser;
 import org.springframework.social.gitlab.api.user.GitlabUserOperations;
-import org.springframework.web.client.RestOperations;
 
 public class GitlabUserTemplate extends AbstractGitlabOperations implements GitlabUserOperations {
 
-    public GitlabUserTemplate(RestOperations restOperations, GitlabUriBuilder uriBuilder) {
-        super(restOperations, uriBuilder);
+    public GitlabUserTemplate(GitlabApiBinding gitlabApiBinding) {
+        super(gitlabApiBinding);
     }
 
+    
     @Override
     public GitlabUser getCurrentUser() {
-        URI uri = uriBuilder.api().pathSegment("user").build().toUri();
-        return restOperations.getForObject(uri, GitlabUser.class);
+        URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("user").build().toUri();
+        return gitlabApiBinding.restOperations().getForObject(uri, GitlabUser.class);
     }
 
     @Override
     public GitlabUser getUser(long userId) {
-        URI uri = uriBuilder.api().pathSegment("users", "{userId}").buildAndExpand(userId).toUri();
-        return restOperations.getForObject(uri, GitlabUser.class);
+        URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("users", "{userId}").buildAndExpand(userId).toUri();
+        return gitlabApiBinding.restOperations().getForObject(uri, GitlabUser.class);
     }
 
     @Override
     public List<GitlabSSHKey> getCurrentUsersSSHKeys() {
-        URI uri = uriBuilder.api().pathSegment("user", "keys").build().toUri();
-        return restOperations.getForObject(uri, GitlabSSHKeyList.class);
+        URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("user", "keys").build().toUri();
+        return gitlabApiBinding.restOperations().getForObject(uri, GitlabSSHKeyList.class);
     }
 
     @Override
     public GitlabSSHKey getCurrentUsersSSHKey(long keyId) {
-        URI uri = uriBuilder.api().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
-        return restOperations.getForObject(uri, GitlabSSHKey.class);
+        URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
+        return gitlabApiBinding.restOperations().getForObject(uri, GitlabSSHKey.class);
     }
 
     

@@ -112,9 +112,9 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     }
 
     private void initSubApis() {
-        this.profileOperations = new GitlabProfileTemplate(getRestTemplate(), uriBuilder);
-        this.userOperations = new GitlabUserTemplate(getRestTemplate(), uriBuilder);
-        this.projectOperations = new ProjectTemplate(getRestTemplate(), uriBuilder);
+        this.profileOperations = new GitlabProfileTemplate(this);
+        this.userOperations = new GitlabUserTemplate(this);
+        this.projectOperations = new ProjectTemplate(this);
     }
 
 }
