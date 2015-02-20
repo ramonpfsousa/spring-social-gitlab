@@ -16,9 +16,19 @@
 package org.springframework.social.gitlab.api.core.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.net.URI;
+import java.util.List;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.gitlab.api.Gitlab;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
+import org.springframework.social.gitlab.api.core.LinkHeaderParser;
+import org.springframework.social.gitlab.api.core.PagedList;
+import org.springframework.social.gitlab.api.core.Paging;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabModule;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.profile.impl.GitlabProfileTemplate;
@@ -28,6 +38,7 @@ import org.springframework.social.gitlab.api.user.GitlabUserOperations;
 import org.springframework.social.gitlab.api.user.impl.GitlabUserTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
+import org.springframework.web.client.RestOperations;
 
 /**
  *
@@ -43,10 +54,13 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
 
     private final GitlabUriBuilder uriBuilder;
 
+    private final LinkHeaderParser linkHeaderParser;
+
     public GitlabTemplate(String accessToken, GitlabUriBuilder uriBuilder) {
         super(accessToken);
         Assert.notNull(uriBuilder, "GitlabUriBuilder can not be null.");
         this.uriBuilder = uriBuilder;
+        this.linkHeaderParser = new LinkHeaderParser();
         initSubApis();
     }
 
@@ -66,6 +80,29 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     }
 
     @Override
+    public RestOperations restOperations() {
+        return this.getRestTemplate();
+    }
+
+    @Override
+    public GitlabUriBuilder uriBuilder() {
+        return this.uriBuilder;
+    }
+
+    public <T> PagedList<T> getForPage(URI url, Class<T> responseType) {
+
+        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
+        };
+
+        ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
+        Paging paging = linkHeaderParser.buildPaging(response.getHeaders().getFirst("Link"));
+
+        PagedList<T> pagedList = new PagedList<>(response.getBody(), paging);
+
+        return pagedList;
+    }
+
+    @Override
     protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
         MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
         ObjectMapper objectMapper = converter.getObjectMapper();
@@ -79,4 +116,5 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         this.userOperations = new GitlabUserTemplate(getRestTemplate(), uriBuilder);
         this.projectOperations = new ProjectTemplate(getRestTemplate(), uriBuilder);
     }
+
 }

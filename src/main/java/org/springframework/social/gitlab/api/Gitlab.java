@@ -25,7 +25,7 @@ import org.springframework.social.gitlab.api.user.GitlabUserOperations;
  *
  * @author p.hoeffling
  */
-public interface Gitlab extends ApiBinding {
+public interface Gitlab extends ApiBinding, GitlabApiBinding {
 
     GitlabProfileOperations profileOperations();
     

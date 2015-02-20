@@ -15,15 +15,20 @@
  */
 package org.springframework.social.gitlab.api;
 
+import java.net.URI;
+import org.springframework.social.gitlab.api.core.PagedList;
+import org.springframework.web.client.RestOperations;
+
 /**
  *
  * @author p.hoeffling
  */
-public interface GitlabClient {
-    
-    
+public interface GitlabApiBinding {
+        
     GitlabUriBuilder uriBuilder();
     
+    RestOperations restOperations();
     
+    // <T> PagedList<T> getForPage(URI url, Class<T>[] responseType);
     
 }
