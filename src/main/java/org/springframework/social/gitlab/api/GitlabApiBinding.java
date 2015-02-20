@@ -29,6 +29,6 @@ public interface GitlabApiBinding {
     
     RestOperations restOperations();
     
-    // <T> PagedList<T> getForPage(URI url, Class<T>[] responseType);
+    <T> PagedList<T> getForPage(URI url, Class<T> responseType);
     
 }

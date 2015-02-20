@@ -18,6 +18,7 @@ package org.springframework.social.gitlab.api.project.impl;
 import java.net.URI;
 import java.util.List;
 import org.springframework.social.gitlab.api.GitlabApiBinding;
+import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
@@ -55,57 +56,56 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
         super(gitlabApiBinding);
     }
 
-    
     @Override
-    public List<Project> getProjectsAccessibleByCurrentUser() {
+    public PagedList<Project> getProjectsAccessibleByCurrentUser() {
         URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS)
                 .build()
                 .toUri();
-        
-        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
+
+        return gitlabApiBinding.getForPage(uri, Project.class);
     }
 
     @Override
-    public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
+    public PagedList<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters) {
         URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.getForPage(uri, Project.class);
     }
 
     @Override
-    public List<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder) {
+    public PagedList<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder) {
         return getProjectsAccessibleByCurrentUser(builder.build());
     }
 
     @Override
-    public List<Project> getProjectsOwnedByCurrentUser() {
+    public PagedList<Project> getProjectsOwnedByCurrentUser() {
         URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, OWNED)
                 .build()
                 .toUri();
 
-        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.getForPage(uri, Project.class);
     }
 
     @Override
-    public List<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder) {
+    public PagedList<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder) {
         return getProjectsOwnedByCurrentUser(builder.build());
     }
 
     @Override
-    public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
+    public PagedList<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters) {
         URI uri = gitlabApiBinding.uriBuilder().api()
                 .pathSegment(PROJECTS, OWNED)
                 .queryParams(parameters)
                 .build()
                 .toUri();
 
-        return gitlabApiBinding.restOperations().getForObject(uri, ProjectList.class);
+        return gitlabApiBinding.getForPage(uri, Project.class);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
                 .toUri();
 
         return gitlabApiBinding.restOperations().getForObject(uri, ProjectHook.class);
-        
+
     }
 
     @Override
@@ -189,6 +189,4 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
         return gitlabApiBinding.restOperations().getForObject(uri, ProjectBranch.class);
     }
 
-    
-    
 }

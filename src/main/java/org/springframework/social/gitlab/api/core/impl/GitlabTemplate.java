@@ -89,14 +89,13 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         return this.uriBuilder;
     }
 
+    
+    @Override
     public <T> PagedList<T> getForPage(URI url, Class<T> responseType) {
 
-        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
-        };
-
+        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() { };
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
         Paging paging = linkHeaderParser.buildPaging(response.getHeaders().getFirst("Link"));
-
         PagedList<T> pagedList = new PagedList<>(response.getBody(), paging);
 
         return pagedList;

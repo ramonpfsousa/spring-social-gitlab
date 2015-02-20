@@ -15,7 +15,9 @@
  */
 package org.springframework.social.gitlab.api;
 
+import java.net.URI;
 import org.springframework.social.ApiBinding;
+import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
 import org.springframework.social.gitlab.api.user.GitlabUserOperations;
@@ -32,5 +34,7 @@ public interface Gitlab extends ApiBinding, GitlabApiBinding {
     GitlabUserOperations userOperations();
     
     ProjectOperations projectOperations();
+
+    
     
 }

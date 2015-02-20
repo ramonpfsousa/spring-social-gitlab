@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.project;
 
 import java.util.List;
+import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -24,17 +25,17 @@ import org.springframework.util.MultiValueMap;
  */
 public interface ProjectOperations {
 
-    public List<Project> getProjectsAccessibleByCurrentUser();
+    public PagedList<Project> getProjectsAccessibleByCurrentUser();
 
-    public List<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
+    public PagedList<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
 
-    public List<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
+    public PagedList<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
 
-    public List<Project> getProjectsOwnedByCurrentUser();
+    public PagedList<Project> getProjectsOwnedByCurrentUser();
 
-    public List<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
+    public PagedList<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
 
-    public List<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
+    public PagedList<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
 
     public Project getProject(long projectId);
 

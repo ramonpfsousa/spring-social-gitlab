@@ -24,17 +24,17 @@ import java.util.List;
  */
 public class PagedList<T> {
 
-    private final List<T> data;
+    private final List<T> content;
 
     private final Paging paging;
 
-    public PagedList(List<T> data, Paging paging) {
-        this.data = data;
+    public PagedList(List<T> content, Paging paging) {
+        this.content = content;
         this.paging = paging;
     }
 
-    public List<T> getData() {
-        return data;
+    public List<T> getContent() {
+        return content;
     }
 
     public Paging getPaging() {

@@ -45,7 +45,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("project-list"));
 
-        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser();
+        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser().getContent();
 
         assertThat(projects, hasSize(2));
     }
@@ -70,7 +70,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .withSort(ListProjectParametersBuilder.Sort.Desc)
                 .withSearch("foo");
 
-        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser(params);
+        List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser(params).getContent();
 
         assertThat(projects, hasSize(2));
     }
@@ -85,7 +85,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("project-list"));
 
-        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser();
+        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser().getContent();
 
         assertThat(projects, hasSize(2));
     }
@@ -110,7 +110,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .withSort(ListProjectParametersBuilder.Sort.Desc)
                 .withSearch("foo");
 
-        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser(params);
+        List<Project> projects = gitlab.projectOperations().getProjectsOwnedByCurrentUser(params).getContent();
 
         assertThat(projects, hasSize(2));
     }

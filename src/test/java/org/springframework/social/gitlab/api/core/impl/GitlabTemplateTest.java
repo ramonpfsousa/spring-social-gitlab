@@ -73,8 +73,8 @@ public class GitlabTemplateTest extends AbstractGitlabApiTest {
 
         assertThat(paged, is(notNullValue()));
         // Body
-        assertThat(paged.getData(), is(notNullValue()));
-        assertThat(paged.getData(), hasSize(20));
+        assertThat(paged.getContent(), is(notNullValue()));
+        assertThat(paged.getContent(), hasSize(20));
 
         // Paging
         assertThat(paged.getPaging(), is(notNullValue()));
