@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api;
 
 import java.net.URI;
+import java.util.List;
 import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.web.client.RestOperations;
 
@@ -30,5 +31,7 @@ public interface GitlabApiBinding {
     RestOperations restOperations();
     
     <T> PagedList<T> getForPage(URI url, Class<T> responseType);
+    
+    <T> List<T> getForList(URI url, Class<T> responseType);
     
 }

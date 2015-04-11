@@ -102,6 +102,16 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     }
 
     @Override
+    public <T> List<T> getForList(URI url, Class<T> responseType) {
+        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() { };
+        ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
+        
+        return response.getBody();
+    }
+
+    
+    
+    @Override
     protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
         MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
         ObjectMapper objectMapper = converter.getObjectMapper();
