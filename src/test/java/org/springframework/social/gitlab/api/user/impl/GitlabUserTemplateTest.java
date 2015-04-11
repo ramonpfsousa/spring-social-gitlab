@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
-import org.springframework.social.gitlab.api.user.GitlabSSHKey;
+import org.springframework.social.gitlab.api.user.UserKey;
 import org.springframework.social.gitlab.api.user.GitlabUser;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -61,7 +61,7 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("gitlab-sshkey-list"));
 
-        List<GitlabSSHKey> currentUsersSSHKeys = gitlab.userOperations().getCurrentUsersSSHKeys();
+        List<UserKey> currentUsersSSHKeys = gitlab.userOperations().getCurrentUsersSSHKeys();
 
         assertThat(currentUsersSSHKeys, hasSize(2));
     }
@@ -73,7 +73,7 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("gitlab-sshkey"));
 
-        GitlabSSHKey sshKey = gitlab.userOperations().getCurrentUsersSSHKey(1);
+        UserKey sshKey = gitlab.userOperations().getCurrentUsersSSHKey(1);
 
         assertThat(sshKey.getId(), is(1L));
         assertThat(sshKey.getTitle(), is("Public key"));

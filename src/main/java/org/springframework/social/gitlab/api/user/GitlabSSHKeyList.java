@@ -21,6 +21,6 @@ import java.util.ArrayList;
  *
  * @author p.hoeffling
  */
-public class GitlabSSHKeyList extends ArrayList<GitlabSSHKey> {
+public class GitlabSSHKeyList extends ArrayList<UserKey> {
     private static final long serialVersionUID = 1L;    
 }

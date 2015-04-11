@@ -19,7 +19,7 @@ import java.net.URI;
 import java.util.List;
 import org.springframework.social.gitlab.api.GitlabApiBinding;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
-import org.springframework.social.gitlab.api.user.GitlabSSHKey;
+import org.springframework.social.gitlab.api.user.UserKey;
 import org.springframework.social.gitlab.api.user.GitlabSSHKeyList;
 import org.springframework.social.gitlab.api.user.GitlabUser;
 import org.springframework.social.gitlab.api.user.GitlabUserOperations;
@@ -44,15 +44,15 @@ public class GitlabUserTemplate extends AbstractGitlabOperations implements Gitl
     }
 
     @Override
-    public List<GitlabSSHKey> getCurrentUsersSSHKeys() {
+    public List<UserKey> getCurrentUsersSSHKeys() {
         URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("user", "keys").build().toUri();
         return gitlabApiBinding.restOperations().getForObject(uri, GitlabSSHKeyList.class);
     }
 
     @Override
-    public GitlabSSHKey getCurrentUsersSSHKey(long keyId) {
+    public UserKey getCurrentUsersSSHKey(long keyId) {
         URI uri = gitlabApiBinding.uriBuilder().api().pathSegment("user", "keys", "{keyId}").buildAndExpand(keyId).toUri();
-        return gitlabApiBinding.restOperations().getForObject(uri, GitlabSSHKey.class);
+        return gitlabApiBinding.restOperations().getForObject(uri, UserKey.class);
     }
 
     
