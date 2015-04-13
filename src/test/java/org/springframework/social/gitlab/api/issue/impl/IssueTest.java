@@ -16,18 +16,15 @@
 package org.springframework.social.gitlab.api.issue.impl;
 
 import java.util.List;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasItem;
-import org.junit.Test;
-import org.springframework.http.HttpMethod;
-import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
-import org.springframework.social.gitlab.api.issue.Issue;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.springframework.http.HttpMethod;
+import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import org.springframework.social.gitlab.api.issue.Issue;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -100,10 +97,62 @@ public class IssueTest extends AbstractGitlabApiTest {
 
         assertThat(issue.getLabels(), is(notNullValue()));
         assertThat(issue.getLabels(), hasItem("feature"));
-        
+
         assertThat(issue.getMilestone(), is(notNullValue()));
         assertThat(issue.getAuthor(), is(notNullValue()));
         assertThat(issue.getAssignee(), is(notNullValue()));
     }
 
+    @Test
+    public void testNestedUserMatching() {
+        long projectId = 8L;
+        long issueId = 42L;
+
+        String url = uriBuilder.api()
+                .pathSegment("projects", "{projectId}", "issues", "{issueId}")
+                .buildAndExpand(projectId, issueId)
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withJsonResourceSuccess("issue"));
+
+        Issue issue = gitlab.issueOperations().getProjectIssue(projectId, issueId);
+        Issue.User assignee = issue.getAssignee();
+        
+        assertThat(assignee.getId(), is(2L));
+        assertThat(assignee.getUsername(), is("jack_smith"));
+        assertThat(assignee.getEmail(), is("jack@example.com"));
+        assertThat(assignee.getName(), is("Jack Smith"));
+        assertThat(assignee.getState(), is("active"));
+        
+        verifyUtcDate(assignee.getCreatedAt(), 2012, 5, 23, 8, 1, 1);
+        
+    }
+    
+    @Test
+    public void testNestedMilestoneMatching() {
+        long projectId = 8L;
+        long issueId = 42L;
+
+        String url = uriBuilder.api()
+                .pathSegment("projects", "{projectId}", "issues", "{issueId}")
+                .buildAndExpand(projectId, issueId)
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withJsonResourceSuccess("issue"));
+
+        Issue.Milestone milestone = gitlab.issueOperations().getProjectIssue(projectId, issueId).getMilestone();
+        
+         assertThat(milestone.getId(), is(1L));
+        assertThat(milestone.getTitle(), is("v1.0"));
+        assertThat(milestone.getDescription(), is("v1.0 description"));
+        assertThat(milestone.getState(), is("closed"));
+        
+        verifyUtcDate(milestone.getDueDate(), 2012, 7, 20);
+        verifyUtcDate(milestone.getUpdatedAt(), 2012, 7, 4, 13, 42, 48);
+        verifyUtcDate(milestone.getCreatedAt(), 2012, 6, 4, 13, 42, 48);
+    }
 }
