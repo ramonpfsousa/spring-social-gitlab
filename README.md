@@ -41,4 +41,13 @@ Admin an modifying operations may follow.
     - [x] get single branch
     - [ ] protect single branch
     - [ ] unprotect single branch
+- [ ] [Issues](http://doc.gitlab.com/ce/api/issues.html)
+    - [x] list issues created by current user
+    - [ ] list issues created by current user, paginated, filtered, ordered
+    - [x] list issues by project
+    - [ ] list issues by project, paginated, filtered, ordered
+    - [x] get a single issue
+    - [ ] create a new issue
+    - [ ] edit an existing issue
+
   
