@@ -29,6 +29,8 @@ import org.springframework.social.gitlab.api.core.LinkHeaderParser;
 import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.core.Paging;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabModule;
+import org.springframework.social.gitlab.api.issue.IssueOperations;
+import org.springframework.social.gitlab.api.issue.impl.IssueTemplate;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.profile.impl.GitlabProfileTemplate;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
@@ -50,6 +52,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     private GitlabUserOperations userOperations;
 
     private ProjectOperations projectOperations;
+
+    private IssueOperations issueOperations;
 
     private final GitlabUriBuilder uriBuilder;
 
@@ -77,6 +81,12 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     public ProjectOperations projectOperations() {
         return projectOperations;
     }
+    
+    @Override
+    public IssueOperations issueOperations() {
+        return issueOperations;
+    }
+
 
     @Override
     public RestOperations restOperations() {
@@ -88,11 +98,11 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         return this.uriBuilder;
     }
 
-    
     @Override
     public <T> PagedList<T> getForPage(URI url, Class<T> responseType) {
 
-        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() { };
+        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
+        };
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
         Paging paging = linkHeaderParser.buildPaging(response.getHeaders().getFirst("Link"));
         PagedList<T> pagedList = new PagedList<>(response.getBody(), paging);
@@ -102,14 +112,13 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
 
     @Override
     public <T> List<T> getForList(URI url, Class<T> responseType) {
-        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() { };
+        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
+        };
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
-        
+
         return response.getBody();
     }
 
-    
-    
     @Override
     protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
         MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
@@ -123,6 +132,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         this.profileOperations = new GitlabProfileTemplate(this);
         this.userOperations = new GitlabUserTemplate(this);
         this.projectOperations = new ProjectTemplate(this);
+        this.issueOperations = new IssueTemplate(this);
     }
 
+   
 }

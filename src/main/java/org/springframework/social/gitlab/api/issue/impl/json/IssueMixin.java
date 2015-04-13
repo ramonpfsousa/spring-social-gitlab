@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 j.roesler.
+ * Copyright 2015 p.hoeffling.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,70 +17,54 @@ package org.springframework.social.gitlab.api.issue.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabObjectMixin;
 import org.springframework.social.gitlab.api.issue.Issue;
-import org.springframework.social.gitlab.api.user.GitlabUser;
 
 /**
  *
  * @author j.roesler
+ * @author p.hoeffling
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class IssueMixin extends GitlabObjectMixin {
-    
+
     @JsonProperty("id")
     long id;
 
-    @JsonProperty("number")
-    long number;
+    @JsonProperty("iid")
+    long iid;
 
-    @JsonProperty("state")
-    String state;
+    @JsonProperty("project_id")
+    long projectId;
 
     @JsonProperty("title")
     String title;
 
-    @JsonProperty("body")
-    String body;
+    @JsonProperty("description")
+    String description;
 
-    @JsonProperty("user")
-    GitlabUser user;
+    @JsonProperty("state")
+    String state;
 
-    @JsonProperty("labels")
-    ArrayList<Issue.Label> labels;
-
-    @JsonProperty("assignee")
-    GitlabUser assignee;
-
-    @JsonProperty("milestone")
-    Issue.Milestone milestone;
-
-    @JsonProperty("comments")
-    long comments;
-
-    @JsonProperty("closed_at")
-    Date closedAt;
+    @JsonProperty("updated_at")
+    Date updatedAt;
 
     @JsonProperty("created_at")
     Date createdAt;
 
-    @JsonProperty("updated_at")
-    Date lastActivityAt;
-    
-    @JsonProperty("losed_by")
-    GitlabUser closedBy;
+    @JsonProperty("labels")
+    Set<String> labels;
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static abstract class LabelMixin extends GitlabObjectMixin {
+    @JsonProperty("milestone")
+    Issue.Milestone milestone;
 
-        @JsonProperty("name")
-        String name;
+    @JsonProperty("assignee")
+    Issue.User assignee;
 
-        @JsonProperty("color")
-        String color;
-    }
+    @JsonProperty("author")
+    Issue.User author;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static abstract class MilestoneMixin extends GitlabObjectMixin {
@@ -88,31 +72,45 @@ public abstract class IssueMixin extends GitlabObjectMixin {
         @JsonProperty("id")
         long id;
 
-        @JsonProperty("number")
-        long number;
-
-        @JsonProperty("state")
-        String state;
-
         @JsonProperty("title")
         String title;
 
         @JsonProperty("description")
         String description;
 
-        @JsonProperty("creator")
-        GitlabUser creator;
+        @JsonProperty("state")
+        String state;
 
-        @JsonProperty("open_issues")
-        long openIssues;
+        @JsonProperty("due_date")
+        Date dueDate;
 
-        @JsonProperty("closed_issues")
-        long closedIssues;
+        @JsonProperty("updated_at")
+        Date updatedAt;
 
         @JsonProperty("created_at")
         Date createdAt;
 
-        @JsonProperty("updated_at")
-        Date lastActivityAt;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static abstract class UserMixin extends GitlabObjectMixin {
+
+        @JsonProperty("id")
+        long id;
+
+        @JsonProperty("username")
+        String username;
+
+        @JsonProperty("email")
+        String email;
+
+        @JsonProperty("name")
+        String name;
+
+        @JsonProperty("state")
+        String state;
+
+        @JsonProperty("created_at")
+        Date createdAt;
     }
 }

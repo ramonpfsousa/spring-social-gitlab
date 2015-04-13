@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 j.roesler.
+ * Copyright 2015 p.hoeffling.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,19 @@
  */
 package org.springframework.social.gitlab.api.issue;
 
+import org.springframework.social.gitlab.api.core.PagedList;
+
 /**
  *
  * @author j.roesler
+ * @author p.hoeffling
  */
 public interface IssueOperations {
+
+    PagedList<Issue> getIssuesCreatedByCurrentUser();
+
+    PagedList<Issue> getProjectIssues(long projectId);
     
+    Issue getProjectIssue(long projectId, long issueId);
+
 }

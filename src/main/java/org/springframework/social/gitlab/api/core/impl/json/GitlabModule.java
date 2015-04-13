@@ -16,6 +16,8 @@
 package org.springframework.social.gitlab.api.core.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.social.gitlab.api.issue.Issue;
+import org.springframework.social.gitlab.api.issue.impl.json.IssueMixin;
 import org.springframework.social.gitlab.api.profile.GitlabProfile;
 import org.springframework.social.gitlab.api.profile.impl.json.GitlabProfileMixin;
 import org.springframework.social.gitlab.api.project.Project;
@@ -43,7 +45,7 @@ public class GitlabModule extends SimpleModule {
 
     @Override
     public void setupModule(SetupContext context) {
-        
+
         // Project
         context.setMixInAnnotations(Project.class, ProjectMixin.class);
         context.setMixInAnnotations(Project.Permissions.class, ProjectMixin.PermissionsMixin.class);
@@ -57,18 +59,23 @@ public class GitlabModule extends SimpleModule {
         context.setMixInAnnotations(ProjectBranch.Commit.Author.class, ProjectBranchMixin.CommitMixin.AuthorMixin.class);
         context.setMixInAnnotations(ProjectBranch.Commit.Committer.class, ProjectBranchMixin.CommitMixin.CommitterMixin.class);
         context.setMixInAnnotations(ProjectBranch.Commit.Parent.class, ProjectBranchMixin.CommitMixin.ParentMixin.class);
-        
+
         // ProjectEvent
         context.setMixInAnnotations(ProjectEvent.class, ProjectEventMixin.class);
-        
+
         // ProjectHook
         context.setMixInAnnotations(ProjectHook.class, ProjectHookMixin.class);
-        
+
         // ProjectMember
         context.setMixInAnnotations(ProjectMember.class, ProjectMemberMixin.class);
-        
+
         // GitlabProfile
         context.setMixInAnnotations(GitlabProfile.class, GitlabProfileMixin.class);
+
+        // Issues
+        context.setMixInAnnotations(Issue.class, IssueMixin.class);
+        context.setMixInAnnotations(Issue.Milestone.class, IssueMixin.MilestoneMixin.class);
+        context.setMixInAnnotations(Issue.User.class, IssueMixin.UserMixin.class);
     }
 
 }

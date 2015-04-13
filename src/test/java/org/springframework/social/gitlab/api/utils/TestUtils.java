@@ -27,6 +27,13 @@ import static org.junit.Assert.assertThat;
  */
 public class TestUtils {
 
+    public static void verifyUtcDate(Date date, int year, int month, int day) {
+        DateTime datetime = new DateTime(date).withZone(DateTimeZone.UTC);
+        assertThat("year", datetime.getYear(), is(year));
+		assertThat("month", datetime.getMonthOfYear(), is(month));
+		assertThat("day", datetime.getDayOfMonth(), is(day));
+    }
+    
     public static void verifyUtcDate(Date date, int year, int month, int day, int hour, int minute, int second) {
         DateTime datetime = new DateTime(date).withZone(DateTimeZone.UTC);
         assertThat("year", datetime.getYear(), is(year));
