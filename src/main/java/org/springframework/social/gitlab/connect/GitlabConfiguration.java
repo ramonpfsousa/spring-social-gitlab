@@ -17,7 +17,7 @@ package org.springframework.social.gitlab.connect;
 
 import org.springframework.core.env.PropertyResolver;
 import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.util.Assert;
+import org.springframework.social.gitlab.api.core.DefaultGitlabUriBuilder;
 
 /**
  *
@@ -27,10 +27,10 @@ public class GitlabConfiguration {
 
     public static GitlabConfiguration fromProperties(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
         if (baseUrl == null) {
-            baseUrl = GitlabUriBuilder.DEFAULT_URL;
+            baseUrl = DefaultGitlabUriBuilder.DEFAULT_URL;
         }
         if (apiPath == null) {
-            apiPath = GitlabUriBuilder.DEFAULT_API_PATH;
+            apiPath = DefaultGitlabUriBuilder.DEFAULT_API_PATH;
         }        
         return new GitlabConfiguration(applicationId, applicationSecret, baseUrl, apiPath);
     }
@@ -53,7 +53,7 @@ public class GitlabConfiguration {
     public GitlabConfiguration(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
         this.applicationId = applicationId;
         this.applicationSecret = applicationSecret;
-        this.uriBuilder = new GitlabUriBuilder(baseUrl, apiPath);
+        this.uriBuilder = new DefaultGitlabUriBuilder(baseUrl, apiPath);
     }
 
     public String getApplicationId() {

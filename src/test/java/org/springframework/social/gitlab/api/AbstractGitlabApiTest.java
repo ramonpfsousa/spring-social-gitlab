@@ -5,6 +5,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.social.gitlab.api.core.DefaultGitlabUriBuilder;
 import org.springframework.social.gitlab.api.core.impl.GitlabTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.ResponseCreator;
@@ -25,7 +26,7 @@ public abstract class AbstractGitlabApiTest {
 
     @Before
     public void setup() {
-        uriBuilder = new GitlabUriBuilder();
+        uriBuilder = new DefaultGitlabUriBuilder();
         gitlab = new GitlabTemplate("ACCESS_TOKEN", uriBuilder);
         mockServer = MockRestServiceServer.createServer(gitlab.getRestTemplate());
 

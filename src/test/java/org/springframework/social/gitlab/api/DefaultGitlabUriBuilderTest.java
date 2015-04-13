@@ -19,35 +19,36 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.social.gitlab.api.core.DefaultGitlabUriBuilder;
 
 /**
  *
  * @author p.hoeffling
  */
-public class GitlabUriBuilderTest {
+public class DefaultGitlabUriBuilderTest {
     
-    private GitlabUriBuilder builder;
+    private DefaultGitlabUriBuilder builder;
     
     @Before
     public void setup() {
-        builder = new GitlabUriBuilder();
+        builder = new DefaultGitlabUriBuilder();
     }
     
  
     @Test
     public void testConstructors() {
         
-        GitlabUriBuilder localBuilder;
+        DefaultGitlabUriBuilder localBuilder;
         
-        localBuilder = new GitlabUriBuilder();
-        assertThat(localBuilder.getBaseUrl(), is(GitlabUriBuilder.DEFAULT_URL));
-        assertThat(localBuilder.getApiPath(), is(GitlabUriBuilder.DEFAULT_API_PATH));
+        localBuilder = new DefaultGitlabUriBuilder();
+        assertThat(localBuilder.getBaseUrl(), is(DefaultGitlabUriBuilder.DEFAULT_URL));
+        assertThat(localBuilder.getApiPath(), is(DefaultGitlabUriBuilder.DEFAULT_API_PATH));
         
-        localBuilder = new GitlabUriBuilder("http://localhost:8080");
+        localBuilder = new DefaultGitlabUriBuilder("http://localhost:8080");
         assertThat(localBuilder.getBaseUrl(), is("http://localhost:8080"));
-        assertThat(localBuilder.getApiPath(), is(GitlabUriBuilder.DEFAULT_API_PATH));
+        assertThat(localBuilder.getApiPath(), is(DefaultGitlabUriBuilder.DEFAULT_API_PATH));
         
-        localBuilder = new GitlabUriBuilder("http://localhost:8080", "/api/foo");
+        localBuilder = new DefaultGitlabUriBuilder("http://localhost:8080", "/api/foo");
         assertThat(localBuilder.getBaseUrl(), is("http://localhost:8080"));
         assertThat(localBuilder.getApiPath(), is("/api/foo"));
         
