@@ -30,7 +30,7 @@ import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.core.Paging;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabModule;
 import org.springframework.social.gitlab.api.issue.IssueOperations;
-import org.springframework.social.gitlab.api.issue.imp.IssueTemplate;
+import org.springframework.social.gitlab.api.issue.impl.IssueTemplate;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.profile.impl.GitlabProfileTemplate;
 import org.springframework.social.gitlab.api.project.ProjectOperations;

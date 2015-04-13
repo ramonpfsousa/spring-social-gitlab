@@ -35,7 +35,7 @@ public class Issue extends GitlabObject {
     private Date createdAt;
     private Set<String> labels;
     private Milestone milestone;
-    private User asignee;
+    private User assignee;
     private User author;
 
     public long getId() {
@@ -118,12 +118,12 @@ public class Issue extends GitlabObject {
         this.milestone = milestone;
     }
 
-    public User getAsignee() {
-        return asignee;
+    public User getAssignee() {
+        return assignee;
     }
 
-    public void setAsignee(User asignee) {
-        this.asignee = asignee;
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
     }
 
     public User getAuthor() {

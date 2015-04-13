@@ -59,8 +59,8 @@ public abstract class IssueMixin extends GitlabObjectMixin {
     @JsonProperty("milestone")
     Issue.Milestone milestone;
 
-    @JsonProperty("asignee")
-    Issue.User asignee;
+    @JsonProperty("assignee")
+    Issue.User assignee;
 
     @JsonProperty("author")
     Issue.User author;

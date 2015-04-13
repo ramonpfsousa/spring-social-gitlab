@@ -16,6 +16,9 @@
 package org.springframework.social.gitlab.api.issue.impl;
 
 import java.util.List;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.hasItem;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
@@ -95,6 +98,12 @@ public class IssueTest extends AbstractGitlabApiTest {
         verifyUtcDate(issue.getUpdatedAt(), 2012, 7, 12, 13, 43, 19);
         verifyUtcDate(issue.getCreatedAt(), 2012, 6, 28, 12, 58, 6);
 
+        assertThat(issue.getLabels(), is(notNullValue()));
+        assertThat(issue.getLabels(), hasItem("feature"));
+        
+        assertThat(issue.getMilestone(), is(notNullValue()));
+        assertThat(issue.getAuthor(), is(notNullValue()));
+        assertThat(issue.getAssignee(), is(notNullValue()));
     }
 
 }
