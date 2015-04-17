@@ -17,6 +17,7 @@ package org.springframework.social.gitlab.api.project.impl;
 
 import java.net.URI;
 import java.util.List;
+
 import org.springframework.social.gitlab.api.GitlabApiBinding;
 import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
@@ -32,6 +33,8 @@ import org.springframework.social.gitlab.api.project.ProjectList;
 import org.springframework.social.gitlab.api.project.ProjectMember;
 import org.springframework.social.gitlab.api.project.ProjectMemberList;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
+import org.springframework.social.gitlab.api.project.ProjectTree;
+import org.springframework.social.gitlab.api.project.ProjectTreeList;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -51,6 +54,7 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
     static final String BRANCHES = "branches";
     static final String BRANCH_NAME = "{branchName}";
     static final String REPOSITORY = "repository";
+    static final String TREE = "tree";
 
     public ProjectTemplate(GitlabApiBinding gitlabApiBinding) {
         super(gitlabApiBinding);
@@ -187,6 +191,18 @@ public class ProjectTemplate extends AbstractGitlabOperations implements Project
                 .toUri();
 
         return gitlabApiBinding.restOperations().getForObject(uri, ProjectBranch.class);
+    }
+
+    @Override
+    public List<ProjectTree> getProjecTree(long projectId, String refName, String path) {
+        URI uri = gitlabApiBinding.uriBuilder().api()
+                .pathSegment(PROJECTS, PROJECT_ID, REPOSITORY, TREE)
+                .queryParam("ref_name", refName)
+                .queryParam("path", path)
+                .buildAndExpand(projectId)
+                .toUri();
+
+        return gitlabApiBinding.restOperations().getForObject(uri, ProjectTreeList.class);
     }
 
 }
