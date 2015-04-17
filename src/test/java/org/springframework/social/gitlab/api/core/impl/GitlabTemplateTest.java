@@ -16,13 +16,16 @@
 package org.springframework.social.gitlab.api.core.impl;
 
 import java.net.URI;
+import java.util.List;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.core.PagedList;
-
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 
@@ -83,5 +86,48 @@ public class GitlabTemplateTest extends AbstractGitlabApiTest {
         assertThat(paged.getPaging().getNext().getPage(), is(2));
         assertThat(paged.getPaging().getNext().getPerPage(), is(20));
     }
+    
+    
+    @Test
+    public void testListResponseType() {
+        URI uri = uriBuilder.api().pathSegment("list-test").build().toUri();
 
+        mockServer
+                .expect(requestTo(uri))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withJsonResourceSuccess("pojo-list"));
+        
+        
+        List<Pojo> list = gitlab.getForList(uri, Pojo.class);
+        
+        assertThat(list, is(notNullValue()));
+        assertThat(list, hasSize(20));
+        assertThat(list.get(0), instanceOf(Pojo.class));
+        
+    }
+    
+
+    public static class Pojo {
+        private long id;
+        private String name;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+        
+    }
+    
+    
 }
