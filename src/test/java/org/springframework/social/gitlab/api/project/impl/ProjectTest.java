@@ -17,6 +17,7 @@ package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -48,6 +49,8 @@ public class ProjectTest extends AbstractGitlabApiTest {
         List<Project> projects = gitlab.projectOperations().getProjectsAccessibleByCurrentUser().getContent();
 
         assertThat(projects, hasSize(2));
+        assertThat(projects.get(0), instanceOf(Project.class));
+        
     }
 
     @Test
