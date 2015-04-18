@@ -19,7 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -134,6 +136,15 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         this.issueOperations = new IssueTemplate(this);
     }
 
+    /**
+     * Extend ParaeterizedTypeReference with a ParamaterizedType.
+     *
+     * Resolves the actual type of a list to a Parameterized type.
+     *
+     * @param <T>
+     * @param listItemType
+     * @return
+     */
     private <T> ParameterizedTypeReference<List<T>> createTypeReference(final Class<T> listItemType) {
         return new ParameterizedTypeReference<List<T>>() {
             @Override
@@ -148,30 +159,4 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         };
     }
 
-    static class ParameterizedListItemType implements ParameterizedType {
-
-        private final Type rawType;
-        private final Type[] actualTypeArguments;
-
-        ParameterizedListItemType(Type rawType, Type[] actualTypeArguments) {
-            this.rawType = rawType;
-            this.actualTypeArguments = actualTypeArguments;
-        }
-
-        @Override
-        public Type[] getActualTypeArguments() {
-            return actualTypeArguments;
-        }
-
-        @Override
-        public Type getRawType() {
-            return rawType;
-        }
-
-        @Override
-        public Type getOwnerType() {
-            return null;
-        }
-
-    }
 }

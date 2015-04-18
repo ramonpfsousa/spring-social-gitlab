@@ -86,28 +86,55 @@ public class GitlabTemplateTest extends AbstractGitlabApiTest {
         assertThat(paged.getPaging().getNext().getPage(), is(2));
         assertThat(paged.getPaging().getNext().getPerPage(), is(20));
     }
-    
-    
+
     @Test
-    public void testListResponseType() {
-        URI uri = uriBuilder.api().pathSegment("list-test").build().toUri();
+    public void testListItemType() {
+        URI uri = uriBuilder.api().pathSegment("page-list-test").build().toUri();
 
         mockServer
                 .expect(requestTo(uri))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("pojo-list"));
-        
-        
+
         List<Pojo> list = gitlab.getForList(uri, Pojo.class);
-        
+
         assertThat(list, is(notNullValue()));
         assertThat(list, hasSize(20));
         assertThat(list.get(0), instanceOf(Pojo.class));
-        
+        assertThat(list.get(0).getId(), is(0L));
+        assertThat(list.get(0).getName(), is("Lorem"));
     }
-    
 
+    @Test
+    public void testPageContentListItemType() {
+        URI uri = uriBuilder.api().pathSegment("list-test").build().toUri();
+
+        mockServer
+                .expect(requestTo(uri))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withPagedJsonResourceSuccess(
+                                "pojo-list",
+                                "<http://gitlab.com/api/v3/paging-test?page=2&per_page=20>; rel=\"next\", <http://gitlab.com/api/v3/paging-test?page=1&per_page=20>; rel=\"first\", <http://gitlab.com/api/v3/paging-test?page=2&per_page=20>; rel=\"last\""
+                        ));
+
+        PagedList<Pojo> page = gitlab.getForPage(uri, Pojo.class);
+
+        assertThat(page, is(notNullValue()));
+
+        List<Pojo> list = page.getContent();
+
+        assertThat(list, is(notNullValue()));
+        assertThat(list, hasSize(20));
+        assertThat(list.get(0), instanceOf(Pojo.class));
+        assertThat(list.get(0).getId(), is(0L));
+        assertThat(list.get(0).getName(), is("Lorem"));
+    }
+
+    /**
+     * Simple Pojo to test type resolution.
+     */
     public static class Pojo {
+
         private long id;
         private String name;
 
@@ -126,8 +153,7 @@ public class GitlabTemplateTest extends AbstractGitlabApiTest {
         public void setName(String name) {
             this.name = name;
         }
-        
+
     }
-    
-    
+
 }
