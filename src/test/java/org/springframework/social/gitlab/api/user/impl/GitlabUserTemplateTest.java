@@ -1,7 +1,9 @@
 package org.springframework.social.gitlab.api.user.impl;
 
 import java.util.List;
+import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -64,6 +66,7 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
         List<UserKey> currentUsersSSHKeys = gitlab.userOperations().getCurrentUsersSSHKeys();
 
         assertThat(currentUsersSSHKeys, hasSize(2));
+        assertThat(currentUsersSSHKeys.get(0), instanceOf(UserKey.class));
     }
 
     @Test

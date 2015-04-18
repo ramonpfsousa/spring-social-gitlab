@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
+import org.hamcrest.Matchers;
 
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
@@ -24,6 +25,7 @@ import org.springframework.social.gitlab.api.project.ProjectBranch;
 import org.springframework.social.gitlab.api.project.ProjectTree;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -49,6 +51,7 @@ public class ProjectTreeTest extends AbstractGitlabApiTest {
 
         assertThat(tree, is(notNullValue()));
         assertThat(tree, hasSize(6));
+        assertThat(tree.get(0), instanceOf(ProjectTree.class));
 
         assertThat(tree.get(0).getName(), is("assets"));
         assertThat(tree.get(0).getType(), is("tree"));

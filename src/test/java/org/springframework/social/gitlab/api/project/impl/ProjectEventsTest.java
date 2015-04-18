@@ -16,8 +16,10 @@
 package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
+import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
@@ -47,6 +49,7 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
         assertThat(events, is(notNullValue()));
         assertThat(events, hasSize(3));
+        assertThat(events.get(0), instanceOf(ProjectEvent.class));
     }
 
     @Test

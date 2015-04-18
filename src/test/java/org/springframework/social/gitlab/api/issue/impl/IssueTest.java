@@ -16,8 +16,10 @@
 package org.springframework.social.gitlab.api.issue.impl;
 
 import java.util.List;
+import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -66,6 +68,7 @@ public class IssueTest extends AbstractGitlabApiTest {
         List<Issue> issues = gitlab.issueOperations().getProjectIssues(projectId).getContent();
 
         assertThat(issues, hasSize(2));
+        assertThat(issues.get(0), instanceOf(Issue.class));
     }
 
     @Test
