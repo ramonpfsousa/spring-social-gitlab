@@ -16,6 +16,8 @@
 package org.springframework.social.gitlab.api.core.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.List;
 import org.springframework.core.ParameterizedTypeReference;
@@ -81,12 +83,11 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     public ProjectOperations projectOperations() {
         return projectOperations;
     }
-    
+
     @Override
     public IssueOperations issueOperations() {
         return issueOperations;
     }
-
 
     @Override
     public RestOperations restOperations() {
@@ -101,8 +102,7 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     @Override
     public <T> PagedList<T> getForPage(URI url, Class<T> responseType) {
 
-        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
-        };
+        ParameterizedTypeReference<List<T>> listType = createTypeReference(responseType);
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
         Paging paging = linkHeaderParser.buildPaging(response.getHeaders().getFirst("Link"));
         PagedList<T> pagedList = new PagedList<>(response.getBody(), paging);
@@ -111,9 +111,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     }
 
     @Override
-    public <T> List<T> getForList(URI url, Class<T> responseType) {
-        ParameterizedTypeReference<List<T>> listType = new ParameterizedTypeReference<List<T>>() {
-        };
+    public <T> List<T> getForList(URI url, final Class<T> responseType) {
+        ParameterizedTypeReference<List<T>> listType = createTypeReference(responseType);
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
 
         return response.getBody();
@@ -135,5 +134,44 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         this.issueOperations = new IssueTemplate(this);
     }
 
-   
+    private <T> ParameterizedTypeReference<List<T>> createTypeReference(final Class<T> listItemType) {
+        return new ParameterizedTypeReference<List<T>>() {
+            @Override
+            public Type getType() {
+                Type[] actualTypes = {listItemType};
+                ParameterizedType listType = new ParameterizedListItemType(
+                        List.class,
+                        actualTypes
+                );
+                return listType;
+            }
+        };
+    }
+
+    static class ParameterizedListItemType implements ParameterizedType {
+
+        private final Type rawType;
+        private final Type[] actualTypeArguments;
+
+        ParameterizedListItemType(Type rawType, Type[] actualTypeArguments) {
+            this.rawType = rawType;
+            this.actualTypeArguments = actualTypeArguments;
+        }
+
+        @Override
+        public Type[] getActualTypeArguments() {
+            return actualTypeArguments;
+        }
+
+        @Override
+        public Type getRawType() {
+            return rawType;
+        }
+
+        @Override
+        public Type getOwnerType() {
+            return null;
+        }
+
+    }
 }
