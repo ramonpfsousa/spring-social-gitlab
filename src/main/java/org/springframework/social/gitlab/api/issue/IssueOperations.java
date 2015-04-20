@@ -35,16 +35,22 @@ public interface IssueOperations {
     /**
      * Get a paged list of issues and append the given parammeters.
      * 
-     * @param parameters
-     * @return 
+     * This method allows access to query params as needed.
+     * If you just wat to pass in a set of supported/known parameters lokk at the builder based version of this method.
+     * 
+     * @param parameters  The map of parameters send to the server.
+     * @return A pgaed list of issues.
      */
     PagedList<Issue> getIssuesCreatedByCurrentUser(MultiValueMap<String, String> parameters);
     
     /**
      * Get a paged list of issues filtered and ordered.
      * 
-     * @param parametersBuilder
-     * @return 
+     * All parameters defined in the builder are supported by the current API implementation.
+     * Use this interface for syntactic sugar and/or if you want to be sure the params are supported by the current API.
+     * 
+     * @param parametersBuilder The builder to apply.
+     * @return A paged list of issues.
      */
     PagedList<Issue> getIssuesCreatedByCurrentUser(ListIssueParametersBuilder parametersBuilder);
 
