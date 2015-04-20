@@ -21,6 +21,9 @@ import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.core.impl.AbstractGitlabOperations;
 import org.springframework.social.gitlab.api.issue.Issue;
 import org.springframework.social.gitlab.api.issue.IssueOperations;
+import org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder;
+import org.springframework.util.Assert;
+import org.springframework.util.MultiValueMap;
 
 /**
  *
@@ -44,6 +47,25 @@ public class IssueTemplate extends AbstractGitlabOperations implements IssueOper
                 .toUri();
 
         return gitlabApiBinding.getForPage(uri, Issue.class);
+    }
+
+    @Override
+    public PagedList<Issue> getIssuesCreatedByCurrentUser(MultiValueMap<String, String> parameters) {
+        Assert.notNull(parameters, "MultiValueMap<String, String> parameters can not be null.");
+        URI uri = gitlabApiBinding.uriBuilder().api()
+                .pathSegment(ISSUES)
+                .queryParams(parameters)
+                .build()
+                .toUri();
+
+        return gitlabApiBinding.getForPage(uri, Issue.class);
+    }
+
+    @Override
+    public PagedList<Issue> getIssuesCreatedByCurrentUser(ListIssueParametersBuilder parametersBuilder) {
+        Assert.notNull(parametersBuilder, "ListIssueParametersBuilder parametersBuilder can not be null.");
+
+        return this.getIssuesCreatedByCurrentUser(parametersBuilder.build());
     }
 
     @Override

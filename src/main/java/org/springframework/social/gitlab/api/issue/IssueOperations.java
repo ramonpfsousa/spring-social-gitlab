@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.issue;
 
 import org.springframework.social.gitlab.api.core.PagedList;
+import org.springframework.util.MultiValueMap;
 
 /**
  *
@@ -24,10 +25,47 @@ import org.springframework.social.gitlab.api.core.PagedList;
  */
 public interface IssueOperations {
 
+    /**
+     * Get a paged list of issues created by the current user.
+     * 
+     * @return 
+     */
     PagedList<Issue> getIssuesCreatedByCurrentUser();
 
+    /**
+     * Get a paged list of issues and append the given parammeters.
+     * 
+     * @param parameters
+     * @return 
+     */
+    PagedList<Issue> getIssuesCreatedByCurrentUser(MultiValueMap<String, String> parameters);
+    
+    /**
+     * Get a paged list of issues filtered and ordered.
+     * 
+     * @param parametersBuilder
+     * @return 
+     */
+    PagedList<Issue> getIssuesCreatedByCurrentUser(ListIssueParametersBuilder parametersBuilder);
+
+    /**
+     * Get all issues of a project.
+     * 
+     * @param projectId
+     * @return 
+     */
     PagedList<Issue> getProjectIssues(long projectId);
     
+    /**
+     * Get a single issue of a project.
+     * 
+     * @param projectId
+     * @param issueId
+     * @return 
+     */
     Issue getProjectIssue(long projectId, long issueId);
+
+    
+    
 
 }

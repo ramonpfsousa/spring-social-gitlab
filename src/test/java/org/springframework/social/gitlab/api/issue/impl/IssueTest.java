@@ -26,7 +26,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
+import org.springframework.social.gitlab.api.core.PagedList;
 import org.springframework.social.gitlab.api.issue.Issue;
+import org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -157,5 +159,34 @@ public class IssueTest extends AbstractGitlabApiTest {
         verifyUtcDate(milestone.getDueDate(), 2012, 7, 20);
         verifyUtcDate(milestone.getUpdatedAt(), 2012, 7, 4, 13, 42, 48);
         verifyUtcDate(milestone.getCreatedAt(), 2012, 6, 4, 13, 42, 48);
+    }
+    
+
+    @Test
+    public void testGetProjectIssuesWithParams() {
+
+        ListIssueParametersBuilder paramsBuilder = new ListIssueParametersBuilder()
+                .withLabels("foo")
+                .withStateClosed()
+                .withOrderByCreateAt()
+                .withSortAsc();
+        
+        String url = uriBuilder.api()
+                .pathSegment("issues")
+                .queryParams(paramsBuilder.build())
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withJsonResourceSuccess("issue-list"));
+        
+        
+        
+        PagedList<Issue> page = gitlab.issueOperations().getIssuesCreatedByCurrentUser(paramsBuilder);
+        
+        assertThat(page.getContent(), hasSize(2));
+        assertThat(page.getContent().get(0), instanceOf(Issue.class));
+        
+        
     }
 }
