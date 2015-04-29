@@ -67,7 +67,7 @@ public class IssueTemplate extends AbstractGitlabOperations implements IssueOper
 
         return this.getIssuesCreatedByCurrentUser(parametersBuilder.build());
     }
-
+    
     @Override
     public PagedList<Issue> getProjectIssues(long projectId) {
         URI uri = gitlabApiBinding.uriBuilder().api()
@@ -76,6 +76,25 @@ public class IssueTemplate extends AbstractGitlabOperations implements IssueOper
                 .toUri();
 
         return gitlabApiBinding.getForPage(uri, Issue.class);
+    }
+    
+    @Override
+    public PagedList<Issue> getProjectIssues(long projectId, MultiValueMap<String, String> parameters) {
+        Assert.notNull(parameters, "MultiValueMap<String, String> parameters can not be null.");
+        URI uri = gitlabApiBinding.uriBuilder().api()
+                .pathSegment("projects", "{projectId}", ISSUES)
+                .queryParams(parameters)
+                .buildAndExpand(projectId)
+                .toUri();
+
+        return gitlabApiBinding.getForPage(uri, Issue.class);
+    }
+    
+    @Override
+    public PagedList<Issue> getProjectIssues(long projectId, ListIssueParametersBuilder parametersBuilder) {
+       Assert.notNull(parametersBuilder, "ListIssueParametersBuilder parametersBuilder can not be null.");
+
+        return this.getProjectIssues(projectId, parametersBuilder.build());
     }
 
     @Override

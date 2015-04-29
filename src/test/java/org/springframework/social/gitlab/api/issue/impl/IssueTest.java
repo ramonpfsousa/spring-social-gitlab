@@ -49,7 +49,9 @@ public class IssueTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue-list"));
 
-        List<Issue> issues = gitlab.issueOperations().getIssuesCreatedByCurrentUser().getContent();
+        List<Issue> issues = gitlab.issueOperations()
+                .getIssuesCreatedByCurrentUser()
+                .getContent();
 
         assertThat(issues, hasSize(2));
     }
@@ -67,7 +69,9 @@ public class IssueTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue-list"));
 
-        List<Issue> issues = gitlab.issueOperations().getProjectIssues(projectId).getContent();
+        List<Issue> issues = gitlab.issueOperations()
+                .getProjectIssues(projectId)
+                .getContent();
 
         assertThat(issues, hasSize(2));
         assertThat(issues.get(0), instanceOf(Issue.class));
@@ -87,7 +91,8 @@ public class IssueTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue"));
 
-        Issue issue = gitlab.issueOperations().getProjectIssue(projectId, issueId);
+        Issue issue = gitlab.issueOperations()
+                .getProjectIssue(projectId, issueId);
 
         assertThat(issue, is(notNullValue()));
         assertThat(issue.getId(), is(42L));
@@ -122,19 +127,20 @@ public class IssueTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue"));
 
-        Issue issue = gitlab.issueOperations().getProjectIssue(projectId, issueId);
+        Issue issue = gitlab.issueOperations()
+                .getProjectIssue(projectId, issueId);
         Issue.User assignee = issue.getAssignee();
-        
+
         assertThat(assignee.getId(), is(2L));
         assertThat(assignee.getUsername(), is("jack_smith"));
         assertThat(assignee.getEmail(), is("jack@example.com"));
         assertThat(assignee.getName(), is("Jack Smith"));
         assertThat(assignee.getState(), is("active"));
-        
+
         verifyUtcDate(assignee.getCreatedAt(), 2012, 5, 23, 8, 1, 1);
-        
+
     }
-    
+
     @Test
     public void testNestedMilestoneMatching() {
         long projectId = 8L;
@@ -149,28 +155,28 @@ public class IssueTest extends AbstractGitlabApiTest {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue"));
 
-        Issue.Milestone milestone = gitlab.issueOperations().getProjectIssue(projectId, issueId).getMilestone();
-        
-         assertThat(milestone.getId(), is(1L));
+        Issue.Milestone milestone = gitlab.issueOperations()
+                .getProjectIssue(projectId, issueId)
+                .getMilestone();
+
+        assertThat(milestone.getId(), is(1L));
         assertThat(milestone.getTitle(), is("v1.0"));
         assertThat(milestone.getDescription(), is("v1.0 description"));
         assertThat(milestone.getState(), is("closed"));
-        
+
         verifyUtcDate(milestone.getDueDate(), 2012, 7, 20);
         verifyUtcDate(milestone.getUpdatedAt(), 2012, 7, 4, 13, 42, 48);
         verifyUtcDate(milestone.getCreatedAt(), 2012, 6, 4, 13, 42, 48);
     }
-    
 
     @Test
-    public void testGetProjectIssuesWithParams() {
-
+    public void testGetIssuesCreatedByCurrentUserWithParams() {
         ListIssueParametersBuilder paramsBuilder = new ListIssueParametersBuilder()
                 .withLabels("foo")
                 .withStateClosed()
                 .withOrderByCreateAt()
                 .withSortAsc();
-        
+
         String url = uriBuilder.api()
                 .pathSegment("issues")
                 .queryParams(paramsBuilder.build())
@@ -179,14 +185,41 @@ public class IssueTest extends AbstractGitlabApiTest {
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("issue-list"));
+
+        PagedList<Issue> page = gitlab.issueOperations()
+                .getIssuesCreatedByCurrentUser(paramsBuilder);
+
+        assertThat(page.getContent(), hasSize(2));
+        assertThat(page.getContent()
+                .get(0), instanceOf(Issue.class));
+    }
+
+    @Test
+    public void testGetProjectIssuesWithParams() {
+        long projectId = 8L;
+
+        ListIssueParametersBuilder paramsBuilder = new ListIssueParametersBuilder()
+                .withLabels("foo")
+                .withStateClosed()
+                .withOrderByCreateAt()
+                .withSortAsc();
+
+        String url = uriBuilder.api()
+                .pathSegment("projects", "{projectId}", "issues")
+                .queryParams(paramsBuilder.build())
+                .buildAndExpand(projectId)
+                .toUriString();
+
+        mockServer.expect(requestTo(url))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withJsonResourceSuccess("issue-list"));
         
-        
-        
-        PagedList<Issue> page = gitlab.issueOperations().getIssuesCreatedByCurrentUser(paramsBuilder);
+        PagedList<Issue> page = gitlab.issueOperations()
+                .getProjectIssues(projectId, paramsBuilder);
         
         assertThat(page.getContent(), hasSize(2));
-        assertThat(page.getContent().get(0), instanceOf(Issue.class));
-        
-        
+        assertThat(page.getContent()
+                .get(0), instanceOf(Issue.class));
     }
+
 }
