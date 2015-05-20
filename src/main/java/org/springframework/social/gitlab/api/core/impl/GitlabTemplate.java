@@ -29,6 +29,8 @@ import org.springframework.social.gitlab.api.core.Paging;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabModule;
 import org.springframework.social.gitlab.api.issue.IssueOperations;
 import org.springframework.social.gitlab.api.issue.impl.IssueTemplate;
+import org.springframework.social.gitlab.api.note.NoteOperations;
+import org.springframework.social.gitlab.api.note.impl.NoteTemplate;
 import org.springframework.social.gitlab.api.profile.GitlabProfileOperations;
 import org.springframework.social.gitlab.api.profile.impl.GitlabProfileTemplate;
 import org.springframework.social.gitlab.api.project.ProjectOperations;
@@ -56,6 +58,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     private ProjectOperations projectOperations;
 
     private IssueOperations issueOperations;
+
+    private NoteOperations noteOperations;
 
     private final GitlabUriBuilder uriBuilder;
 
@@ -87,6 +91,11 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
     @Override
     public IssueOperations issueOperations() {
         return issueOperations;
+    }
+
+    @Override
+    public NoteOperations noteOperations() {
+        return noteOperations;
     }
 
     @Override
@@ -131,6 +140,7 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         this.userOperations = new GitlabUserTemplate(this);
         this.projectOperations = new ProjectTemplate(this);
         this.issueOperations = new IssueTemplate(this);
+        this.noteOperations = new NoteTemplate(this);
     }
 
     /**
@@ -138,9 +148,9 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
      *
      * Resolves the actual type of a list to a Parameterized type.
      *
-     * @param <T>
-     * @param listItemType
-     * @return
+     * @param <T> Type of the item in the list.
+     * @param listItemType Class of the list item type.
+     * @return  A type reference configured for the list item type.
      */
     private <T> ParameterizedTypeReference<List<T>> createTypeReference(final Class<T> listItemType) {
         return new ParameterizedTypeReference<List<T>>() {

@@ -29,5 +29,5 @@ public interface NoteOperations {
     
     List<Note> getProjectSnippetNotes(long projectId, long snippetId);
     
-    Note getProjectSnippetNote(long projectId, long snippetId);
+    Note getProjectSnippetNote(long projectId, long snippetId, long noteId);
 }
