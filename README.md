@@ -6,6 +6,8 @@ Since version 7.7 Gitlab implements OAuth application features.
 
 ## Project state
 
+[![Build Status](https://travis-ci.org/burning-duck/spring-social-gitlab.svg?branch=master)](https://travis-ci.org/burning-duck/spring-social-gitlab)
+
 First goal is to provide a read only implementation of the users API.
 Admin an modifying operations may follow.
 
