@@ -16,12 +16,6 @@
 package org.springframework.social.gitlab.api.core.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -44,6 +38,10 @@ import org.springframework.social.gitlab.api.user.impl.GitlabUserTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestOperations;
+
+import java.lang.reflect.Type;
+import java.net.URI;
+import java.util.List;
 
 /**
  *
@@ -107,9 +105,8 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
         ParameterizedTypeReference<List<T>> listType = createTypeReference(responseType);
         ResponseEntity<List<T>> response = restOperations().exchange(url, HttpMethod.GET, HttpEntity.EMPTY, listType);
         Paging paging = linkHeaderParser.buildPaging(response.getHeaders().getFirst("Link"));
-        PagedList<T> pagedList = new PagedList<>(response.getBody(), paging);
 
-        return pagedList;
+        return new PagedList<>(response.getBody(), paging);
     }
 
     @Override
@@ -150,11 +147,10 @@ public class GitlabTemplate extends AbstractOAuth2ApiBinding implements Gitlab {
             @Override
             public Type getType() {
                 Type[] actualTypes = {listItemType};
-                ParameterizedType listType = new ParameterizedListItemType(
+                return new ParameterizedListItemType(
                         List.class,
                         actualTypes
                 );
-                return listType;
             }
         };
     }

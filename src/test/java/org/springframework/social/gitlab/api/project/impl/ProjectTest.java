@@ -15,17 +15,16 @@
  */
 package org.springframework.social.gitlab.api.project.impl;
 
-import java.util.List;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
+
+import java.util.List;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -149,8 +148,8 @@ public class ProjectTest extends AbstractGitlabApiTest {
         assertThat(project.isSnippetsEnabled(), is(false));
         assertThat(project.isArchived(), is(false));
 
-        verifyUtcDate(project.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
-        verifyUtcDate(project.getLastActivityAt(), 2013, 9, 30, 13, 46, 02);
+        verifyUtcDate(project.getCreatedAt(), 2013, 9, 30, 13, 46, 2);
+        verifyUtcDate(project.getLastActivityAt(), 2013, 9, 30, 13, 46, 2);
 
     }
 
@@ -169,7 +168,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
         assertThat(owner, is(notNullValue()));
         assertThat(owner.getId(), is(3L));
         assertThat(owner.getName(), is("Diaspora"));
-        verifyUtcDate(owner.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
+        verifyUtcDate(owner.getCreatedAt(), 2013, 9, 30, 13, 46, 2);
     }
 
     @Test
@@ -190,8 +189,8 @@ public class ProjectTest extends AbstractGitlabApiTest {
         assertThat(namespace.getDescription(), is("Namespace description"));
         assertThat(namespace.getPath(), is("diaspora"));
         assertThat(namespace.getOwnerId(), is(1L));
-        verifyUtcDate(namespace.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
-        verifyUtcDate(namespace.getUpdatedAt(), 2013, 9, 30, 13, 46, 02);
+        verifyUtcDate(namespace.getCreatedAt(), 2013, 9, 30, 13, 46, 2);
+        verifyUtcDate(namespace.getUpdatedAt(), 2013, 9, 30, 13, 46, 2);
     }
 
     @Test

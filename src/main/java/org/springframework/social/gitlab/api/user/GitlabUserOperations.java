@@ -16,8 +16,6 @@
 package org.springframework.social.gitlab.api.user;
 
 import java.util.List;
-import org.springframework.social.gitlab.api.user.UserKey;
-import org.springframework.social.gitlab.api.user.GitlabUser;
 
 /**
  *
@@ -30,7 +28,7 @@ public interface GitlabUserOperations {
      * 
      * @return 
      */
-    public GitlabUser getCurrentUser();
+    GitlabUser getCurrentUser();
     
     /**
      * Get an user by id.
@@ -38,14 +36,14 @@ public interface GitlabUserOperations {
      * @param userId
      * @return 
      */
-    public GitlabUser getUser(long userId);
+    GitlabUser getUser(long userId);
 
     /**
      * Get the SSH Keys for the currently logged in user.
      * 
      * @return 
      */
-    public List<UserKey> getCurrentUsersSSHKeys();
+    List<UserKey> getCurrentUsersSSHKeys();
     
     /**
      * Get a single SSH Key for the current user.
@@ -53,6 +51,6 @@ public interface GitlabUserOperations {
      * @param keyId
      * @return 
      */
-    public UserKey getCurrentUsersSSHKey(long keyId);
+    UserKey getCurrentUsersSSHKey(long keyId);
     
 }

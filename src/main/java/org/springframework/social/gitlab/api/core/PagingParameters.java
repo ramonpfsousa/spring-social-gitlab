@@ -62,10 +62,7 @@ public class PagingParameters {
         if (this.page != other.page) {
             return false;
         }
-        if (this.perPage != other.perPage) {
-            return false;
-        }
-        return true;
+        return this.perPage == other.perPage;
     }
 
     public MultiValueMap<String, String> toMap() {

@@ -25,33 +25,33 @@ import org.springframework.util.MultiValueMap;
  */
 public interface ProjectOperations {
 
-    public PagedList<Project> getProjectsAccessibleByCurrentUser();
+    PagedList<Project> getProjectsAccessibleByCurrentUser();
 
-    public PagedList<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
+    PagedList<Project> getProjectsAccessibleByCurrentUser(ListProjectParametersBuilder builder);
 
-    public PagedList<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
+    PagedList<Project> getProjectsAccessibleByCurrentUser(MultiValueMap<String, String> parameters);
 
-    public PagedList<Project> getProjectsOwnedByCurrentUser();
+    PagedList<Project> getProjectsOwnedByCurrentUser();
 
-    public PagedList<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
+    PagedList<Project> getProjectsOwnedByCurrentUser(ListProjectParametersBuilder builder);
 
-    public PagedList<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
+    PagedList<Project> getProjectsOwnedByCurrentUser(MultiValueMap<String, String> parameters);
 
-    public Project getProject(long projectId);
+    Project getProject(long projectId);
 
-    public List<ProjectEvent> getProjectEvents(long projectId);
+    List<ProjectEvent> getProjectEvents(long projectId);
 
-    public List<ProjectMember> getProjectMembers(long projectId);
+    List<ProjectMember> getProjectMembers(long projectId);
 
-    public ProjectMember getProjectMember(long projectId, long userId);
+    ProjectMember getProjectMember(long projectId, long userId);
 
-    public List<ProjectHook> getProjectHooks(long projectId);
+    List<ProjectHook> getProjectHooks(long projectId);
 
-    public ProjectHook getProjectHook(long projectId, long hookId);
+    ProjectHook getProjectHook(long projectId, long hookId);
     
-    public List<ProjectBranch> getProjectBranches(long projectId);
+    List<ProjectBranch> getProjectBranches(long projectId);
     
-    public ProjectBranch getProjectBranch(long projectId, String branchName);
+    ProjectBranch getProjectBranch(long projectId, String branchName);
 
     List<ProjectTree> getProjecTree(long projectId, String path, String refName);
 }

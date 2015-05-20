@@ -1,16 +1,15 @@
 package org.springframework.social.gitlab.api.user.impl;
 
-import java.util.List;
-import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
-import org.springframework.social.gitlab.api.user.UserKey;
 import org.springframework.social.gitlab.api.user.GitlabUser;
+import org.springframework.social.gitlab.api.user.UserKey;
+
+import java.util.List;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;

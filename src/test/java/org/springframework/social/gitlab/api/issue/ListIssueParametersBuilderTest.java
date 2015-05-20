@@ -15,30 +15,16 @@
  */
 package org.springframework.social.gitlab.api.issue;
 
-import java.util.HashSet;
-import java.util.Set;
-import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.anyOf;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.MultiValueMap;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.PARAM_STATE;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.PARAM_ORDER_BY;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.PARAM_SORT;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.PARAM_LABELS;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.State;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.OrderBy;
-import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.Sort;
-import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
+import static org.springframework.social.gitlab.api.issue.ListIssueParametersBuilder.*;
 
 /**
  *

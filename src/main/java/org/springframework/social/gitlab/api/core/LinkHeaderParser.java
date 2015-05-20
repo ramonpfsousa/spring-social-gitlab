@@ -15,13 +15,14 @@
  */
 package org.springframework.social.gitlab.api.core;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -41,7 +42,7 @@ public class LinkHeaderParser {
 
     public Map<String, String> extractLinkRelations(String linkHeader) {
         if (linkHeader == null) {
-            return Collections.<String, String>emptyMap();
+            return Collections.emptyMap();
         }
 
         Map<String, String> map = new HashMap<>();
