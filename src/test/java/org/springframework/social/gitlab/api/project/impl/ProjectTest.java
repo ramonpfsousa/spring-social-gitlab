@@ -16,19 +16,16 @@
 package org.springframework.social.gitlab.api.project.impl;
 
 import java.util.List;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.gitlab.api.AbstractGitlabApiTest;
 import org.springframework.social.gitlab.api.project.ListProjectParametersBuilder;
 import org.springframework.social.gitlab.api.project.Project;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static org.springframework.social.gitlab.api.utils.TestUtils.verifyUtcDate;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 
 /**
  *
@@ -148,7 +145,11 @@ public class ProjectTest extends AbstractGitlabApiTest {
         assertThat(project.isWikiEnabled(), is(true));
         assertThat(project.isSnippetsEnabled(), is(false));
         assertThat(project.isArchived(), is(false));
-
+        assertThat(project.getAvatarUrl(), is("http://example.com/uploads/project/avatar/4/uploads/avatar.png"));
+        assertThat(project.getCreatorId(), is(3L));
+        assertThat(project.getTagList(), containsInAnyOrder("example", "disapora client"));
+        
+        
         verifyUtcDate(project.getCreatedAt(), 2013, 9, 30, 13, 46, 02);
         verifyUtcDate(project.getLastActivityAt(), 2013, 9, 30, 13, 46, 02);
 

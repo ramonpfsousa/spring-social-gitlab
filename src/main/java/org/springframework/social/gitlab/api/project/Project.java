@@ -16,6 +16,7 @@
 package org.springframework.social.gitlab.api.project;
 
 import java.util.Date;
+import java.util.Set;
 import org.springframework.social.gitlab.api.core.GitlabObject;
 
 /**
@@ -67,6 +68,12 @@ public class Project extends GitlabObject {
     private Date createdAt;
 
     private Date lastActivityAt;
+
+    private String avatarUrl;
+
+    private long creatorId;
+
+    private Set<String> tagList;
 
     public long getId() {
         return id;
@@ -154,6 +161,60 @@ public class Project extends GitlabObject {
 
     public Date getLastActivityAt() {
         return lastActivityAt;
+    }
+
+    /**
+     * Since GitLab 7.9
+     *
+     * @return
+     */
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    /**
+     * Since GitLab 7.9
+     *
+     * @param avatarUrl
+     */
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    /**
+     * Since GitLab 7.10
+     *
+     * @return
+     */
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    /**
+     * Since GitLab 7.10
+     *
+     * @param creatorId
+     */
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    /**
+     * Since GitLab 7.10
+     *
+     * @return
+     */
+    public Set<String> getTagList() {
+        return tagList;
+    }
+
+    /**
+     * Since GitLab 7.10
+     *
+     * @param tagList
+     */
+    public void setTagList(Set<String> tagList) {
+        this.tagList = tagList;
     }
 
     public static class Permissions extends GitlabObject {

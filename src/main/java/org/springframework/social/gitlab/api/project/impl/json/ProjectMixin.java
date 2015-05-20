@@ -18,6 +18,7 @@ package org.springframework.social.gitlab.api.project.impl.json;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import java.util.Set;
 import org.springframework.social.gitlab.api.core.impl.json.GitlabObjectMixin;
 import org.springframework.social.gitlab.api.project.Project;
 
@@ -94,6 +95,16 @@ public abstract class ProjectMixin extends GitlabObjectMixin {
     @JsonProperty("last_activity_at")
     Date lastActivityAt;
 
+    @JsonProperty("avatar_url")
+    String avatarUrl;
+
+    @JsonProperty("creator_id")
+    long creatorId;
+    
+    @JsonProperty("tag_list")
+    Set<String> tagList;
+
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static abstract class PermissionsMixin extends GitlabObjectMixin {
 
