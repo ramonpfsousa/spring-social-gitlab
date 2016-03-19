@@ -38,6 +38,7 @@ public class ProjectMembersTest extends AbstractGitlabApiTest {
     public void testGetProjectMembers() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "members")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -55,6 +56,7 @@ public class ProjectMembersTest extends AbstractGitlabApiTest {
     public void testProjectMemberMapping() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "members", "1")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))

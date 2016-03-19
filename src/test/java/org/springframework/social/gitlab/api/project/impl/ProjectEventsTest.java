@@ -35,7 +35,8 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProjectEvents() {
-        String url = uriBuilder.api().pathSegment("projects", "3", "events").toUriString();
+        String url = uriBuilder.api().pathSegment("projects", "3", "events").build()
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
@@ -50,7 +51,8 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectEventMapping() {
-        String url = uriBuilder.api().pathSegment("projects", "3", "events").toUriString();
+        String url = uriBuilder.api().pathSegment("projects", "3", "events").build()
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
@@ -72,7 +74,8 @@ public class ProjectEventsTest extends AbstractGitlabApiTest {
 
     @Test
     public void testProjectEventWithDataMapping() {
-        String url = uriBuilder.api().pathSegment("projects", "3", "events").toUriString();
+        String url = uriBuilder.api().pathSegment("projects", "3", "events").build()
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))

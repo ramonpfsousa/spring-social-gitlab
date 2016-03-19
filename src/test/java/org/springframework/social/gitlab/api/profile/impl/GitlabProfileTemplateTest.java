@@ -19,7 +19,8 @@ public class GitlabProfileTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetProfile() throws Exception {
-        String url = uriBuilder.api().pathSegment("user").toUriString();
+        String url = uriBuilder.api().pathSegment("user").build()
+                .toUriString();
         
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))

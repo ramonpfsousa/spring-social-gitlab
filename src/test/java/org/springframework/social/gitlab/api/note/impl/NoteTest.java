@@ -23,6 +23,7 @@ public class NoteTest extends AbstractGitlabApiTest {
     public void testGetProjectIssueNotes() {
         String url = uriBuilder.api()
                 .path("/projects/1/issues/2/notes")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -39,6 +40,7 @@ public class NoteTest extends AbstractGitlabApiTest {
     public void testGetProjectIssueNote() {
         String url = uriBuilder.api()
                 .path("/projects/1/issues/2/notes/3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -55,6 +57,7 @@ public class NoteTest extends AbstractGitlabApiTest {
     public void testGetProjectSnippetNotes() {
         String url = uriBuilder.api()
                 .path("/projects/1/snippets/2/notes")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -72,6 +75,7 @@ public class NoteTest extends AbstractGitlabApiTest {
     public void testGetProjectSnippetNote() {
         String url = uriBuilder.api()
                 .path("/projects/1/snippets/2/notes/3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -114,6 +118,7 @@ public class NoteTest extends AbstractGitlabApiTest {
     private Note fetchSingleNote() {
         String url = uriBuilder.api()
                 .path("/projects/1/issues/2/notes/3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))

@@ -38,6 +38,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
     public void testGetProjectBranches() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "repository", "branches")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -55,6 +56,7 @@ public class ProjectBranchesTest extends AbstractGitlabApiTest {
     public void testGetProjectBranch() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "repository", "branches", "async")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
