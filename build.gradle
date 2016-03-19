@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 group = 'com.github.burningduck'
 version = '0.0.9-SNAPSHOT'
@@ -7,9 +8,30 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 dependencies {
     compile('org.gitlab:java-gitlab-api:1.2.5')
     compile('org.springframework.social:spring-social-core:1.1.4.RELEASE')
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// see: http://stackoverflow.com/questions/20131915/publishing-artifact-from-gradle-project-to-bintray-maven-repository
+// see: https://gist.github.com/bugs84/b7887fb5d7f9f2d484b8#file-changefromruntimetocompile-gradle
+publishing.publications.all {
+    pom.withXml {
+        asNode().dependencies.'*'.findAll() {
+            it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                dep.name == it.artifactId.text()
+            }
+        }.each { it.scope*.value = 'compile'}
+    }
 }
