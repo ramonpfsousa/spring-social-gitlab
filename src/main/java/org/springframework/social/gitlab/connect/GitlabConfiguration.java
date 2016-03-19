@@ -16,8 +16,6 @@
 package org.springframework.social.gitlab.connect;
 
 import org.springframework.core.env.PropertyResolver;
-import org.springframework.social.gitlab.api.GitlabUriBuilder;
-import org.springframework.social.gitlab.api.core.DefaultGitlabUriBuilder;
 
 /**
  *
@@ -25,36 +23,35 @@ import org.springframework.social.gitlab.api.core.DefaultGitlabUriBuilder;
  */
 public class GitlabConfiguration {
 
-    public static GitlabConfiguration fromProperties(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
-        if (baseUrl == null) {
-            baseUrl = DefaultGitlabUriBuilder.DEFAULT_URL;
+    public static final String DEFAULT_HOST_URL = "https://gitlab.com/";
+
+    public static GitlabConfiguration fromProperties(String applicationId, String applicationSecret, String hostUrl) {
+        if (hostUrl == null) {
+            hostUrl = DEFAULT_HOST_URL;
         }
-        if (apiPath == null) {
-            apiPath = DefaultGitlabUriBuilder.DEFAULT_API_PATH;
-        }        
-        return new GitlabConfiguration(applicationId, applicationSecret, baseUrl, apiPath);
+
+        return new GitlabConfiguration(applicationId, applicationSecret, hostUrl);
     }
     
     public static GitlabConfiguration fromProperties(PropertyResolver propertyResolver) {
         return fromProperties(
                 propertyResolver.getRequiredProperty("spring.social.gitlab.app-id"),
                 propertyResolver.getRequiredProperty("spring.social.gitlab.app-secret"),
-                propertyResolver.getProperty("spring.social.gitlab.base-url"),
-                propertyResolver.getProperty("spring.social.gitlab.api-path")
+                propertyResolver.getProperty("spring.social.gitlab.host-url")
         );
     }
     
     private final String applicationId;
     
     private final String applicationSecret;
+
+    private final String hostUrl;
     
-    private final GitlabUriBuilder uriBuilder;
-    
-    public GitlabConfiguration(String applicationId, String applicationSecret, String baseUrl, String apiPath) {
+    public GitlabConfiguration(String applicationId, String applicationSecret, String hostUrl) {
         this.applicationId = applicationId;
         this.applicationSecret = applicationSecret;
-        this.uriBuilder = new DefaultGitlabUriBuilder(baseUrl, apiPath);
-    }
+        this.hostUrl = hostUrl;
+     }
 
     public String getApplicationId() {
         return applicationId;
@@ -64,9 +61,17 @@ public class GitlabConfiguration {
         return applicationSecret;
     }
 
-    public GitlabUriBuilder getUriBuilder() {
-        return uriBuilder;
+    public String getHostUrl() {
+        return hostUrl;
     }
 
-    
+    public String getAuthorizeUrl() {
+        return "";
+    }
+
+   public String getAccessTokenUrl() {
+        return "";
+    }
+
+
 }

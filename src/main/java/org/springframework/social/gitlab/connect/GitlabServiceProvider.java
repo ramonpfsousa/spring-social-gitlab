@@ -15,8 +15,9 @@
  */
 package org.springframework.social.gitlab.connect;
 
-import org.springframework.social.gitlab.api.Gitlab;
-import org.springframework.social.gitlab.api.core.impl.GitlabTemplate;
+import org.gitlab.api.AuthMethod;
+import org.gitlab.api.GitlabAPI;
+import org.gitlab.api.TokenType;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.oauth2.OAuth2Template;
 
@@ -24,7 +25,7 @@ import org.springframework.social.oauth2.OAuth2Template;
  *
  * @author p.hoeffling
  */
-public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<Gitlab> {
+public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<GitlabAPI> {
 
     private final GitlabConfiguration configuration;
 
@@ -32,8 +33,8 @@ public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<Gitlab>
         super(new OAuth2Template(
                 configuration.getApplicationId(),
                 configuration.getApplicationSecret(),
-                configuration.getUriBuilder().oauth().pathSegment("authorize").build().toUriString(),
-                configuration.getUriBuilder().oauth().pathSegment("token").build().toUriString()
+                configuration.getAuthorizeUrl(),
+                configuration.getAccessTokenUrl()
         ));
         this.configuration = configuration;
     }
@@ -43,8 +44,8 @@ public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<Gitlab>
     }
 
     @Override
-    public Gitlab getApi(String accessToken) {
-        return new GitlabTemplate(accessToken, configuration.getUriBuilder());
+    public GitlabAPI getApi(String accessToken) {
+        return GitlabAPI.connect(configuration.getHostUrl(), accessToken, TokenType.ACCESS_TOKEN, AuthMethod.HEADER);
     }
 
 }

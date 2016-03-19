@@ -15,14 +15,14 @@
  */
 package org.springframework.social.gitlab.connect;
 
+import org.gitlab.api.GitlabAPI;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
-import org.springframework.social.gitlab.api.Gitlab;
 
 /**
  *
  * @author p.hoeffling
  */
-public class GitlabConnectionFactory extends OAuth2ConnectionFactory<Gitlab> {
+public class GitlabConnectionFactory extends OAuth2ConnectionFactory<GitlabAPI> {
 
     public GitlabConnectionFactory(GitlabConfiguration configuration) {
         super(

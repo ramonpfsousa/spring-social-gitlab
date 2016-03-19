@@ -6,12 +6,13 @@ version = '0.0.8-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 repositories {
     mavenCentral()
 }
 dependencies {
+    compile('org.gitlab:java-gitlab-api:1.2.5')
+
+
     compile group: 'org.springframework.social', name: 'spring-social-core', version:'1.1.0.RELEASE'
     compile group: 'commons-logging', name: 'commons-logging', version:'1.2'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.4.4'

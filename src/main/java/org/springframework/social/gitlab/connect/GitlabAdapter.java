@@ -15,52 +15,63 @@
  */
 package org.springframework.social.gitlab.connect;
 
+import org.gitlab.api.GitlabAPI;
+import org.gitlab.api.models.GitlabUser;
 import org.springframework.social.ApiException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
-import org.springframework.social.gitlab.api.Gitlab;
-import org.springframework.social.gitlab.api.profile.GitlabProfile;
+
+import java.io.IOException;
 
 /**
  *
  * @author p.hoeffling
  */
-public class GitlabAdapter implements ApiAdapter<Gitlab> {
+public class GitlabAdapter implements ApiAdapter<GitlabAPI> {
 
     @Override
-    public boolean test(Gitlab gitlab) {
+    public boolean test(GitlabAPI gitlab) {
         try {
-            gitlab.profileOperations().getProfile();
+            gitlab.getUser();
             return true;
-        } catch (ApiException e) {
+        } catch (IOException e) {
             return false;
         }
     }
 
     @Override
-    public void setConnectionValues(Gitlab gitlab, ConnectionValues values) {
-        GitlabProfile profile = gitlab.profileOperations().getProfile();
-        
-        values.setProviderUserId(Long.toString(profile.getId()));
-        values.setDisplayName(profile.getUsername());
-        values.setImageUrl(profile.getAvatarUrl());
+    public void setConnectionValues(GitlabAPI gitlab, ConnectionValues values) {
+
+        try {
+            GitlabUser gitlabUser = gitlab.getUser();
+            values.setProviderUserId(Long.toString(gitlabUser.getId()));
+            values.setDisplayName(gitlabUser.getUsername());
+            values.setImageUrl(gitlabUser.getAvatarUrl());
+        } catch (IOException e) {
+            throw new ApiException("gitlab?", "Could not fetch current user.", e);
+        }
     }
 
     @Override
-    public UserProfile fetchUserProfile(Gitlab gitlab) {
-        GitlabProfile profile = gitlab.profileOperations().getProfile();
+    public UserProfile fetchUserProfile(GitlabAPI gitlab) {
+        try {
+            GitlabUser gitlabUser = gitlab.getUser();
 
-        return new UserProfileBuilder()
-                .setEmail(profile.getEmail())
-                .setName(profile.getName())
-                .setUsername(profile.getUsername())
-                .build();
+            return new UserProfileBuilder()
+                    .setEmail(gitlabUser.getEmail())
+                    .setName(gitlabUser.getName())
+                    .setUsername(gitlabUser.getUsername())
+                    .build();
+        } catch (IOException e) {
+            throw new ApiException("gitlab?", "Could not fetch current user.", e);
+        }
     }
 
     @Override
-    public void updateStatus(Gitlab a, String string) {
+    public void updateStatus(GitlabAPI a, String string) {
+        // Not provided by this Adapter
     }
 
 }
