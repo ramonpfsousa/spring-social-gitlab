@@ -32,8 +32,8 @@ public class GitlabServiceProvider extends AbstractOAuth2ServiceProvider<Gitlab>
         super(new OAuth2Template(
                 configuration.getApplicationId(),
                 configuration.getApplicationSecret(),
-                configuration.getUriBuilder().oauth().pathSegment("authorize").toUriString(),
-                configuration.getUriBuilder().oauth().pathSegment("token").toUriString()
+                configuration.getUriBuilder().oauth().pathSegment("authorize").build().toUriString(),
+                configuration.getUriBuilder().oauth().pathSegment("token").build().toUriString()
         ));
         this.configuration = configuration;
     }

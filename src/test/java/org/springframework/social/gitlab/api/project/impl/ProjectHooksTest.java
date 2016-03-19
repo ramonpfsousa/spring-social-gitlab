@@ -38,6 +38,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
     public void testGetProjectHooks() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "hooks")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -55,6 +56,7 @@ public class ProjectHooksTest extends AbstractGitlabApiTest {
     public void testGetProjectHook() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3", "hooks", "1")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))

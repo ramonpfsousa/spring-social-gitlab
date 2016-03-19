@@ -36,6 +36,7 @@ public class ProjectTreeTest extends AbstractGitlabApiTest {
                 .pathSegment("projects", "3", "repository", "tree")
                 .queryParam("ref_name", "")
                 .queryParam("path", "master")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))

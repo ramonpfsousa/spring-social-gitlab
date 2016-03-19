@@ -38,6 +38,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testGetProjectsAccesibleByCurrentUser() {
         String url = uriBuilder.api()
                 .pathSegment("projects")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -59,6 +60,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .queryParam("order_by", "name")
                 .queryParam("sort", "desc")
                 .queryParam("search", "foo")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -80,6 +82,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testGetProjectsOwnedByCurrentUser() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "owned")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -99,6 +102,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
                 .queryParam("order_by", "name")
                 .queryParam("sort", "desc")
                 .queryParam("search", "foo")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -120,6 +124,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testProjectMapping() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -156,6 +161,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testProjectOwnerMapping() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -174,6 +180,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testProjectNamespaceMapping() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -196,6 +203,7 @@ public class ProjectTest extends AbstractGitlabApiTest {
     public void testProjectPermissionsMapping() {
         String url = uriBuilder.api()
                 .pathSegment("projects", "3")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))

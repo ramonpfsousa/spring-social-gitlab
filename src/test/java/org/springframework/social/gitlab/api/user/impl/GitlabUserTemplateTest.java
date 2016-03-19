@@ -22,7 +22,8 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetUserById() throws Exception {
-        String url = uriBuilder.api().pathSegment("users", "1").toUriString();
+        String url = uriBuilder.api().pathSegment("users", "1").build()
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
@@ -39,7 +40,8 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetCurrentUser() throws Exception {
-        String url = uriBuilder.api().pathSegment("user").toUriString();
+        String url = uriBuilder.api().pathSegment("user").build()
+                .toUriString();
 
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
@@ -57,7 +59,8 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetCurrentUsersSSHKeys() {
-        String url = uriBuilder.api().pathSegment("user", "keys").toUriString();
+        String url = uriBuilder.api().pathSegment("user", "keys").build()
+                .toUriString();
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("gitlab-sshkey-list"));
@@ -70,7 +73,8 @@ public class GitlabUserTemplateTest extends AbstractGitlabApiTest {
 
     @Test
     public void testGetCurrentUsersSSHKey() {
-        String url = uriBuilder.api().pathSegment("user", "keys", "1").toUriString();
+        String url = uriBuilder.api().pathSegment("user", "keys", "1").build()
+                .toUriString();
         mockServer.expect(requestTo(url))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withJsonResourceSuccess("gitlab-sshkey"));

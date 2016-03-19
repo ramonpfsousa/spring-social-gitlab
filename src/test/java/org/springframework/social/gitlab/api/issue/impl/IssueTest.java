@@ -40,6 +40,7 @@ public class IssueTest extends AbstractGitlabApiTest {
     public void testGetIssuesCreatedByCurrentUser() {
         String url = uriBuilder.api()
                 .pathSegment("issues")
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
@@ -177,6 +178,7 @@ public class IssueTest extends AbstractGitlabApiTest {
         String url = uriBuilder.api()
                 .pathSegment("issues")
                 .queryParams(paramsBuilder.build())
+                .build()
                 .toUriString();
 
         mockServer.expect(requestTo(url))
